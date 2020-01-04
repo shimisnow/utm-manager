@@ -1,0 +1,9 @@
+{
+	"devDependencies": {
+		"gulp": "latest",
+		"gulp-util": "latest",
+		"gulp-uglify": "latest",
+		"gulp-rm": "latest",
+		"gulp-rename": "latest"
+	}
+}
