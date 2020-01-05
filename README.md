@@ -1,3 +1,6 @@
+## Documentation
+UTMManager's documentation is included in this repo in the doc directory as md files.
+
 ## API Documentation
 
 | | |
@@ -19,3 +22,15 @@
 | [otherwise()](doc/otherwise.md)    | Execute a function when a verification result is false |
 | [always()](doc/always.md)          | Execute a function when a verification result is either true or false |
 | [toString()](doc/to-string.md)     | Obtain the string representation of the variables and values |
+
+## Versioning
+
+The release cycle is maintained under the [Semantic Versioning guidelines](https://semver.org/).
+
+## Bugs and feature requests
+
+Have a bug or a feature request? Please first search for existing and closed issues. If your problem or idea is not addressed yet, please open a new issue.
+
+## Copyright and license
+
+Code and documentation copyright 2020 the UTM Manager Authors. Code released under the [MIT License](LICENSE.md).
