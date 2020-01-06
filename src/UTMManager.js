@@ -80,24 +80,12 @@ var UTMManager = ( function() {
    *
    * @since 1.0.0
    *
-   * @param {String|Array} url An URL to be parsed or a array when only extended is used
+   * @param {String} url An URL to be parsed
    * @param {Array} extended (Optional) An array with variables to be extracted from the given URL that is not a default utm varible
    *
    * @returns {UTMManager} Return an UTMManager object (this)
    */
   Kernel.prototype.parseURL = function( url, extended ) {
-
-    // if used parseURL() process the page URL
-    if( typeof url === 'undefined' ) {
-      url = window.location.href;
-    } else {
-
-      // if url is an array, was used parseURL( extended )
-      if( Array.isArray( url ) ) {
-        extended = url;
-        url = window.location.href;
-      }
-    }
 
     // it decodes the url to get a clean string
     // get only the variables part from the url
