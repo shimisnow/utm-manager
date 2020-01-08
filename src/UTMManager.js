@@ -1,40 +1,39 @@
 var UTMManager = ( function() {
 
-  var Kernel = function( utm, isURL ) {
+  var Kernel = function( utm ) {
 
+    // current library version
 		this.version = '0.0.1';
 
+    // stores the parsed variables
     this.variables = {};
 
+    // stores the result of a operation with is()
     this.booleanResult = false;
 
+    // stores information about use of is() and() e or()
     this.runtime = {
+      // stores the value passed in the function is()
       is  : null,
+      // stores if the function and() was used
       and : null,
+      // stores if the function or() was used
       or  : null
     }
 
-    // if it is undefined, the value {} will be used
+    // if utm is undefined, parse the page URL
     if( typeof utm !== 'undefined' ) {
+
+      // if a string, parses the content
       if( typeof utm === 'string' ) {
-        if( typeof isURL === 'undefined' ) {
-          // parses a string like utm_source=source&utm_medium=medium ...
-          this.parse( utm );
-        } else {
-          if( isURL ) {
-            // parses a string like https://domain.com/?utm_source=source&utm_medium=medium ...
-            this.parseURL( utm );
-          } else {
-            // parses a string like utm_source=source&utm_medium=medium ...
-            this.parse( utm );
-          }
-        }
+        
+        this.parse( utm );
       } else {
         //expect utm to be a json object
         this.variables = utm;
       }
     } else {
-      this.parseURL( window.location.href );
+      this.parse( window.location.href );
     }
 
 		return this;
@@ -53,6 +52,13 @@ var UTMManager = ( function() {
    */
   Kernel.prototype.parse = function( variables, extended ) {
 
+    var parts = decodeURIComponent( variables ).split( '?' );
+
+    if( parts.length == 2 ) {
+      // split by hash symbol to get ONLY the real variables part
+      variables = parts[ 1 ].split( '#' )[ 0 ];
+    }
+
     // valid variables to utm
     var valid = [ 'utm_source', 'utm_medium', 'utm_campaign', 'utm_term', 'utm_content' ];
 
@@ -69,32 +75,6 @@ var UTMManager = ( function() {
           this.variables[ pair[ 0 ] ] = pair[ 1 ];
         }
       }
-    }
-
-    return this;
-  }
-
-  /**
-   * Parses a URL to extract only utm variables
-   * Ex: https://domain.com/?variable=value&utm_source=source&utm_medium=medium
-   *
-   * @since 1.0.0
-   *
-   * @param {String} url An URL to be parsed
-   * @param {Array} extended (Optional) An array with variables to be extracted from the given URL that is not a default utm varible
-   *
-   * @returns {UTMManager} Return an UTMManager object (this)
-   */
-  Kernel.prototype.parseURL = function( url, extended ) {
-
-    // it decodes the url to get a clean string
-    // get only the variables part from the url
-    var parts = decodeURIComponent( url ).split( '?' );
-    if( parts.length == 2 ) {
-      // split by hash symbol to get ONLY the real variables part
-      var variables = parts[ 1 ].split( '#' )[ 0 ];
-      // parses a string like variable=value&utm_source=source ...
-      this.parse( variables, extended );
     }
 
     return this;
@@ -866,10 +846,8 @@ var UTMManager = ( function() {
     return result;
   }
 
-  return function( utm, isURL ) {
-		return new Kernel( utm, isURL );
+  return function( utm ) {
+		return new Kernel( utm );
 	};
 
 })();
-
-UTMManager.PARSE_URL = true;
