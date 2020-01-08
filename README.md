@@ -1,27 +1,28 @@
+## How to use
+
+1. Download the the file utm-manager.min.js from the [latest release](https://github.com/shimisnow/utm-manager/releases).
+2. Include the file in your project.
+
+After the steps above, you can do:
+
+```javascript
+const utm = UTMManager();
+// this will parse the value of windows.location.href
+
+utm.is( 'utm_source' )
+  .equals( 'google' )
+  .and()
+  .is( 'utm_medium' )
+  .equals( 'cpc' )
+  .then( function() {
+    console.log( 'Hey! This is a paid campaign from google!' );
+  } );
+```
+
+For more details how to use see the [guide of examples](examples/basic.md).
+
 ## Documentation
-UTMManager's documentation is included in this repo in the doc directory as md files.
-
-## API Documentation
-
-| | |
-| :--| :--|
-| [UTMManager()](doc/utm-manager.md) | Constructor |
-| [defined()](doc/defined.md)        | Verify if one or more variables are defined |
-| [undefined()](doc/undefined.md)    | Verify if one or more variables are undefined |
-| [empty](doc/empty.md)              | Verify if one or more variables are empty |
-| [get()](doc/get.md)                | Returns the value of one or more variables |
-| [set()](doc/set.md)                | Define a value of one or more variables |
-| [remove()](doc/remove.md)          | Removes one or more variables |
-| [is()](doc/is.md)                  | Defines what variable(s) will be used in a verification |
-| [equals()](doc/equals.md)          | Verify if one or more variables is equals to one or more values |
-| [not()](doc/not.md)                | Verify if one or more variables is not equals to one or more values |
-| [and()](doc/and.md)                | |
-| [or()](doc/or.md)                  | |
-| [result()](doc/result.md)          | Obtain the boolean result of a verification |
-| [then()](doc/then.md)              | Execute a function when a verification result is true |
-| [otherwise()](doc/otherwise.md)    | Execute a function when a verification result is false |
-| [always()](doc/always.md)          | Execute a function when a verification result is either true or false |
-| [toString()](doc/to-string.md)     | Obtain the string representation of the variables and values |
+UTMManager's documentation is included in this repo in the doc directory as Markdown files.
 
 ## Versioning
 
