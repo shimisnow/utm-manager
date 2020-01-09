@@ -19,7 +19,7 @@ utm.is( 'utm_source' )
   } );
 ```
 
-For more details how to use see the [guide of examples](examples/basic.md).
+For more details how to use see the [guide of examples](examples/basic.md) ou the [doc/](doc files).
 
 ## Documentation
 UTMManager's documentation is included in this repo in the doc directory as Markdown files.
