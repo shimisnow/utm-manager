@@ -2,7 +2,7 @@
 ### Get a variable value
 
 ```javascript
-// assuming a url as https://domain.com/?utm_source=google&utm_medium=cpc&utm_campaign=campaign-01
+// assuming an url as https://domain.com/?utm_source=google&utm_medium=cpc&utm_campaign=campaign-01
 var utm = UTMManager();
 
 var utm_source = utm.get( 'utm_source' );
@@ -12,7 +12,7 @@ var utm_source = utm.get( 'utm_source' );
 ### Define a variable value
 
 ```javascript
-// assuming a url as https://domain.com/?utm_source=google&utm_medium=cpc&utm_campaign=campaign-01
+// assuming an url as https://domain.com/?utm_source=google&utm_medium=cpc&utm_campaign=campaign-01
 var utm = UTMManager();
 
 utm.set( 'utm_source', 'facebook' );
@@ -24,7 +24,7 @@ var utm_source = utm.get( 'utm_source' );
 ### Get all variables as a string
 
 ```javascript
-// assuming a url as https://domain.com/?utm_source=google&utm_medium=cpc&utm_campaign=campaign-01
+// assuming an url as https://domain.com/?utm_source=google&utm_medium=cpc&utm_campaign=campaign-01
 var utm = UTMManager();
 
 var string = utm.toString();
@@ -34,7 +34,7 @@ var string = utm.toString();
 ### Taking action when a variable is equals certain value
 
 ```javascript
-// assuming a url as https://domain.com/?utm_source=google&utm_medium=cpc&utm_campaign=campaign-01
+// assuming an url as https://domain.com/?utm_source=google&utm_medium=cpc&utm_campaign=campaign-01
 var utm = UTMManager();
 
 utm.is( 'utm_source' )
@@ -50,7 +50,7 @@ utm.is( 'utm_source' )
 ### Taking action based on multiple variables
 
 ```javascript
-// assuming a url as https://domain.com/?utm_source=google&utm_medium=cpc&utm_campaign=campaign-01
+// assuming an url as https://domain.com/?utm_source=google&utm_medium=cpc&utm_campaign=campaign-01
 var utm = UTMManager();
 
 utm.is( [ 'utm_source', 'utm_medium' ] )
