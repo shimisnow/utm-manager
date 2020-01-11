@@ -27,26 +27,26 @@ UTMManager's documentation is included in the directory [doc](doc/) and each fun
 
 | function                         | since |
 | :------------------------------: | :---: |
-| [`UTMManager()`](utm-manager.md) | 1.0.0 |
-| [`get()`](get.md)                | 1.0.0 |
-| [`set()`](set.md)                | 1.0.0 |
-| [`remove()`](remove.md)          | 1.0.0 |
-| [`toString()`](to-string.md)     | 1.0.0 |
+| [`UTMManager()`](doc/utm-manager.md) | 1.0.0 |
+| [`get()`](doc/get.md)                | 1.0.0 |
+| [`set()`](doc/set.md)                | 1.0.0 |
+| [`remove()`](doc/remove.md)          | 1.0.0 |
+| [`toString()`](doc/to-string.md)     | 1.0.0 |
 
 #### Advanced
 
 | function                           | since |
 | :--------------------------------: | :---: |
-| [`is().defined()`](defined.md)     | 1.0.0 |
-| [`is().undefined()`](undefined.md) | 1.0.0 |
-| [`is().empty()`](empty.md)         | 1.0.0 |
-| [`is().equals()`](equals.md)       | 1.0.0 |
-| [`is().not()`](not.md)             | 1.0.0 |
-| [`then()`](then.md)                | 1.0.0 |
-| [`otherwise()`](otherwise.md)      | 1.0.0 |
-| [`always()`](always.md)            | 1.0.0 |
-| [`and()`](and.md)                  | 1.0.0 |
-| [`or()`](or.md)                    | 1.0.0 |
+| [`is().defined()`](doc/defined.md)     | 1.0.0 |
+| [`is().undefined()`](doc/undefined.md) | 1.0.0 |
+| [`is().empty()`](doc/empty.md)         | 1.0.0 |
+| [`is().equals()`](doc/equals.md)       | 1.0.0 |
+| [`is().not()`](doc/not.md)             | 1.0.0 |
+| [`then()`](doc/then.md)                | 1.0.0 |
+| [`otherwise()`](doc/otherwise.md)      | 1.0.0 |
+| [`always()`](doc/always.md)            | 1.0.0 |
+| [`and()`](doc/and.md)                  | 1.0.0 |
+| [`or()`](doc/or.md)                    | 1.0.0 |
 
 
 ## Versioning
