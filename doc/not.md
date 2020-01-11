@@ -6,7 +6,7 @@ This function do not return a boolean result. It is necessary to use alongside w
 
 ## How to use
 
-#### One variable and one value
+### One variable and one value
 
 Verify if a variable is not equals to the given value.
 
@@ -30,7 +30,7 @@ Using [then()](then.md) to execute a function when the result is true.
   } );
 ```
 
-#### One variable and multiple values
+### One variable and multiple values
 
 Verify if a variable is not equals to any one the given values.
 
@@ -38,7 +38,7 @@ Verify if a variable is not equals to any one the given values.
 .is( 'utm_source' ).not( [ 'google', 'facebook' ] )
 ```
 
-#### Multiple variables and one value
+### Multiple variables and one value
 
 Verify if all variables are not equals the given value.
 
@@ -46,7 +46,7 @@ Verify if all variables are not equals the given value.
 .is( [ 'utm_source', 'utm_campaign' ] ).not( 'google' )
 ```
 
-#### Multiple variables and multiple values
+### Multiple variables and multiple values
 
 Verifies if each variable from is() is not equals to the given value in the same position of not().
 

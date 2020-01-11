@@ -18,4 +18,5 @@ Obtaining the boolean result
 
 ```javascript
 var result = utm.is( 'utm_source' ).defined().result();
+// true or false
 ```

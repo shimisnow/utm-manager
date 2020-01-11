@@ -8,9 +8,7 @@ Receives a function as parameter that will always be executed.
 
 ## How to use
 
-#### Basic use case
-
-The follow code display the message "source is google" when utm_source = google, display the message "source is not google" when utm_source != google and always display the message "always execute"
+The follow code display the message `source is google` when utm_source = google, display the message `source is not google` when utm_source != google and always display the message `always execute`.
 
 ```javascript
 utm.is( 'utm_source' )

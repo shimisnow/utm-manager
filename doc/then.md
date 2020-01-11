@@ -8,7 +8,7 @@ Receives a function as parameter that will be executed when the action performed
 
 ## How to use
 
-#### Basic use case
+### Basic use case
 
 The message "source is google" will be displayed in console when utm_source=google.
 
@@ -20,7 +20,7 @@ utm.is( 'utm_source' )
   } );
 ```
 
-#### Advanced use case
+### Advanced use case
 
 The message "source is google" will be displayed in console when utm_source=google and the messagem "source is facebook" when utm_source=facebook.
 
