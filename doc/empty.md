@@ -18,6 +18,7 @@ Obtaining the boolean result
 
 ```javascript
 var result = utm.is( 'utm_source' ).empty().result();
+// true or false
 ```
 
 To ensure that the variable exists and is empty, use this along with defined()

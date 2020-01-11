@@ -8,9 +8,7 @@ Receives a function as parameter that will be executed when the action performed
 
 ## How to use
 
-#### Basic use case
-
-The message "source is not google" will be displayed in console when utm_source != google.
+The message `source is not google` will be displayed in console when utm_source != google.
 
 ```javascript
 utm.is( 'utm_source' )
