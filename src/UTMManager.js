@@ -3,7 +3,7 @@ var UTMManager = ( function() {
   var Kernel = function( utm ) {
 
     // current library version
-		this.version = '0.0.1';
+		this.version = '1.0.0-beta';
 
     // stores the parsed variables
     this.variables = {};
