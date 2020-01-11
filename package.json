@@ -4,6 +4,8 @@
 		"gulp-util": "latest",
 		"gulp-uglify": "latest",
 		"gulp-rm": "latest",
-		"gulp-rename": "latest"
+		"gulp-rename": "latest",
+		"gulp-zip" : "latest",
+		"gulp-hashsum" : "latest"
 	}
 }
