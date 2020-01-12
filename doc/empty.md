@@ -1,5 +1,7 @@
 # .empty()
 
+`since 1.0.0`
+
 Verify if the given variable(s) is empty.
 
 ## How to use

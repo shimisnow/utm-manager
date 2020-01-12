@@ -1,5 +1,7 @@
 # .remove()
 
+`since 1.0.0`
+
 ## How to use
 
 ### Remove all variables

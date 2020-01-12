@@ -1,5 +1,7 @@
 # .toString()
 
+`since 1.0.0`
+
 Returns the utm variables in string format to be used in an URL.
 
 ## How to use

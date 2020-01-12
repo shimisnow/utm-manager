@@ -1,5 +1,7 @@
 # .always()
 
+`since 1.0.0`
+
 Receives a function as parameter that will always be executed.
 
 ```javascript
