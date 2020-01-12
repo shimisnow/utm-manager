@@ -1,6 +1,6 @@
 var UTMManager = ( function() {
 
-  var Kernel = function( utm ) {
+  var Kernel = function( utm, extended ) {
 
     // current library version
 		this.version = '1.0.0-beta';
@@ -27,10 +27,16 @@ var UTMManager = ( function() {
     // if parameter utm is undefined, parse the page URL
     if( typeof utm !== 'undefined' ) {
 
-      // if a string, parses the content
+      // if a string, parses the string content
       if( typeof utm === 'string' ) {
 
-        this.parse( utm );
+        this.parse( utm, extended );
+
+      // if an array, parse the page URL with extended variables
+      } else if( Array.isArray( utm ) ) {
+
+        this.parse( window.location.href, utm );
+
       } else {
 
         //expect utm to be a json object
@@ -888,8 +894,8 @@ var UTMManager = ( function() {
     return result;
   }
 
-  return function( utm ) {
-		return new Kernel( utm );
+  return function( utm, extended ) {
+		return new Kernel( utm, extended );
 	};
 
 })();

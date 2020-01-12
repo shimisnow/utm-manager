@@ -1,8 +1,15 @@
 describe( 'UTM Manager Test - UTMManager()', function() {
 
 	it( 'UTMManager() - valid string', function() {
-		var string = 'utm_source=source&utm_medium=medium&utm_campaign=campaign';
+		var string = 'utm_source=source&utm_medium=medium&utm_campaign=campaign&variable=value';
+		var result = 'utm_source=source&utm_medium=medium&utm_campaign=campaign'
 		const utm = UTMManager( string );
+		expect( utm.toString() ).toBe( result );
+	} );
+
+	it( 'UTMManager() - valid string (extended)', function() {
+		var string = 'utm_source=source&utm_medium=medium&utm_campaign=campaign&variable=value';
+		const utm = UTMManager( string, [ 'variable' ] );
 		expect( utm.toString() ).toBe( string );
 	} );
 
