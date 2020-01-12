@@ -1,5 +1,7 @@
 # .set()
 
+`since 1.0.0`
+
 ## How to use
 
 ### One value for one variable

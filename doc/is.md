@@ -1,5 +1,7 @@
 # .is()
 
+`since 1.0.0`
+
 Define which variable(s) must be compared.
 
 Use this with [defined()](defined.md), [undefined()](undefined.md), [empty()](empty.md), [equals()](equals.md) or [not()](not.md).

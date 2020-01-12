@@ -1,5 +1,7 @@
 # .equals()
 
+`since 1.0.0`
+
 Verify if one or more variables is equals to one or more values.
 
 This function do not return a boolean result. It is necessary to use alongside with [result()](result.md) to obtain the boolean result.

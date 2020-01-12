@@ -1,5 +1,7 @@
 # UTMManager()
 
+`since 1.0.0`
+
 ## How to use
 
 ### Extract utm from the page url

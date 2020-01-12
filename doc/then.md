@@ -1,5 +1,7 @@
 # .then()
 
+`since 1.0.0`
+
 Receives a function as parameter that will be executed when the action performed together with is() resulted in true.
 
 ```javascript

@@ -1,5 +1,7 @@
 # .get()
 
+`since 1.0.0`
+
 ## How to use
 
 ### Get all variables
