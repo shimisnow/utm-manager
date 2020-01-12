@@ -42,8 +42,8 @@ UTMManager's documentation is included in the directory [doc](doc/) and each fun
 
 #### Basic
 
-| function                         | since | |
-| :------------------------------: | :---: | |
+| function                         | since |      |
+| :------------------------------: | :---: | :--- |
 | [`UTMManager()`](doc/utm-manager.md) | 1.0.0 | Parses an URL or string and extract the utm variables |
 | [`get()`](doc/get.md)                | 1.0.0 | Returns the value of one or more variables |
 | [`set()`](doc/set.md)                | 1.0.0 | Sets the value of one or more variables |
@@ -52,8 +52,8 @@ UTMManager's documentation is included in the directory [doc](doc/) and each fun
 
 #### Advanced
 
-| function                           | since | |
-| :--------------------------------: | :---: | |
+| function                           | since |      |
+| :--------------------------------: | :---: | :--- |
 | [`is().defined()`](doc/defined.md)     | 1.0.0 | Verifies if one or more variables are defined |
 | [`is().undefined()`](doc/undefined.md) | 1.0.0 | Verifies if one or more variables are undefined |
 | [`is().empty()`](doc/empty.md)         | 1.0.0 | Verifies if one or more variables are empty |
