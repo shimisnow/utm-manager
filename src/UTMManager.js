@@ -5,50 +5,59 @@ var UTMManager = ( function() {
     // current library version
 		this.version = '1.0.0-beta';
 
-    // stores the parsed variables
+    // stores all parsed variables
     this.variables = {};
 
-    // stores the result of a operation with is()
+    // stores the result of an operation with is()
     this.booleanResult = false;
 
-    // stores information about use of is() and() e or()
+    // stores information about is() and() e or()
     this.runtime = {
-      // stores the value passed in the function is()
+      // stores the value passed in is()
+      // this can be a string or an array
       is  : null,
       // stores if the function and() was used
+      // this can be null or true
       and : null,
       // stores if the function or() was used
+      // this can be null or true
       or  : null
     }
 
-    // if utm is undefined, parse the page URL
+    // if parameter utm is undefined, parse the page URL
     if( typeof utm !== 'undefined' ) {
 
       // if a string, parses the content
       if( typeof utm === 'string' ) {
-        
+
         this.parse( utm );
       } else {
+
         //expect utm to be a json object
         this.variables = utm;
       }
     } else {
+
+      // parse the page URL
       this.parse( window.location.href );
     }
 
 		return this;
 	};
 
+
+
   /**
-   * Parses a set of URL formatted variables to extract only the ones related with utm
-   * Ex: variable=value&utm_source=source&utm_medium=medium
+   * Parses a string with URL formatted variables or an URL to extract only the ones related with utm. If a set of variables is informed in the extended parameter, the will be extracted too.
+   * Ex: utm_source=source&utm_medium=medium ...
+   * Ex: https://domain.com/?utm_source=source&utm_medium=medium ...
    *
    * @since 1.0.0
    *
-   * @param {String} variables URL formatted variables
-   * @param {Array} extended (Optional) An array with variables to be extracted from the given string that is not a default utm varible
+   * @param {String} variables URL formatted variables OR an URL
+   * @param {Array} extended (Optional) An array with variables to be extracted from the given string that is not a default utm variable
    *
-   * @returns {UTMManager}
+   * @returns {UTMManager} Return an UTMManager object (this)
    */
   Kernel.prototype.parse = function( variables, extended ) {
 
@@ -80,8 +89,11 @@ var UTMManager = ( function() {
     return this;
   }
 
+
+
+
   /**
-   *
+   * Verify if the variable(s) informed in the function is() is defined
    *
    * @since 1.0.0
    *
@@ -131,8 +143,10 @@ var UTMManager = ( function() {
     return this;
   }
 
+
+
   /**
-   *
+   * Verify if the variable(s) informed in the function is() is undefined
    *
    * @since 1.0.0
    *
@@ -182,8 +196,11 @@ var UTMManager = ( function() {
     return this;
   }
 
+
+
   /**
-   *
+   * Verify if the variable(s) informed in the function is() is empty
+   * An undefined variable is also empty
    *
    * @since 1.0.0
    *
@@ -236,14 +253,16 @@ var UTMManager = ( function() {
     return this;
   }
 
+
+
   /**
-   * Verifies if the give utm variable(s) is defined
+   * Get the value of a variable(s)
    *
    * @since 1.0.0
    *
-   * @param {String|Array} utm One (string) or multiple (array) utm variables
+   * @param {String|Array} utm One (string) or multiple (array) utm variables. If empty all variables will be returned.
    *
-   * @returns {String|Array} Single value or mutiple values
+   * @returns {String|Array} Single value (string) or mutiple values (array). If a variable do not exists, the value undefined will be returned for one variable and, if a set of variables was requested, the position of the array for the variable will be undefined.
    */
   Kernel.prototype.get = function( utm ) {
 
@@ -251,11 +270,11 @@ var UTMManager = ( function() {
 
     switch( typeof utm ) {
     case 'string' :
-      // only on result (string)
+      // only one result (string)
       result = this.variables[ utm ];
     break;
     case 'undefined' :
-      // return all the variables in an array
+      // return all variables in an array
       result = this.get( Object.keys( this.variables ) );
     break;
     default :
@@ -271,6 +290,8 @@ var UTMManager = ( function() {
     return result;
   }
 
+
+
   /**
    * Set the value of a variable. Create the variable if the flag create is set to true
    *
@@ -278,7 +299,7 @@ var UTMManager = ( function() {
    *
    * @param {String} variables Variable(s) to be updated
    * @param {String} values Value(s) to be used
-   * @param {boolean} create If the variable(s) do no exists and this flag is defined, the variable(s) will be created
+   * @param {boolean} create If the variable(s) do not exists and this flag is defined, the variable(s) will be created
    *
    * @returns {UTMManager} Return an UTMManager object (this)
    */
@@ -287,7 +308,7 @@ var UTMManager = ( function() {
     // do not accept undefined parameters
     if( typeof variables !== 'undefined' && typeof values !== 'undefined' ) {
 
-      // only on variable
+      // only one variable
       if( typeof variables === 'string' ) {
 
         // only one value
@@ -301,7 +322,7 @@ var UTMManager = ( function() {
           // if the variable do not exists
           } else {
 
-            // if the flag to create the variable is set
+            // if the flag to create the variable exists
             if( typeof create !== 'undefined' ) {
               this.variables[ variables ] = values;
             }
@@ -333,7 +354,7 @@ var UTMManager = ( function() {
         // multiple variables and multiple values
         } else if( Array.isArray( values ) ) {
 
-          // each position of variables array will be mapped it the same position of values array
+          // each position of variables array will be mapped with the same position in the values array
           if( variables.length == values.length ) {
 
             // if it is to create the variable if not exists
@@ -358,13 +379,15 @@ var UTMManager = ( function() {
     return this;
   }
 
+
+
   /**
    * Remove one or more variables. A filter can be used to remove with a condition
    *
    * @since 1.0.0
    *
-   * @param {String|Array|Function} elements One (string) or multiple (array) utm variables. If left empty, all the elements will be removed. If a function is passed, this function will be executed to all variables passing the utm variable value as parameter and the variable will be removed if the function returns true.
-   * @param {Function} filter Will be executed passing the utm variable and its value as parameters and the variable will be removed if the function returns true
+   * @param {String|Array|Function} elements One (string) or multiple (array) utm variables. If left empty, all the elements will be removed. If a function is passed, this function will be executed to all variables passing the utm variable and value as parameters and the variable will be removed if the function returns true.
+   * @param {Function} filter Will be executed passing the utm variable and its value as parameters and the variable will be removed if the function returns true.
    *
    * @returns {UTMManager} Return an UTMManager object (this)
    */
@@ -432,12 +455,14 @@ var UTMManager = ( function() {
     return this;
   }
 
+
+
   /**
    * Enable the runtime.and flag to inform other functions that the result need to be processed with &&
    *
    * @since 1.0.0
    *
-   * @param {boolean} scalar When used and gived a boolean value, the result will be operated with the value using &&
+   * @param {boolean} scalar When used with a boolean parameter, the result will be operated with the value using &&
    *
    * @returns {UTMManager} Return an UTMManager object (this)
    */
@@ -450,12 +475,14 @@ var UTMManager = ( function() {
     return this;
   }
 
+
+
   /**
    * Enable the runtime.or flag to inform other functions that the result need to be processed with ||
    *
    * @since 1.0.0
    *
-   * @param {boolean} scalar When used and gived a boolean value, the result will be operated with the value using ||
+   * @param {boolean} scalar When used with a boolean parameter, the result will be operated with the value using ||
    *
    * @returns {UTMManager} Return an UTMManager object (this)
    */
@@ -468,9 +495,11 @@ var UTMManager = ( function() {
     return this;
   }
 
+
+
   /**
    * Defines which variable(s) will be verified by the equals() or not() function
-   * This function only preced a equals() or not() function
+   * This function only precedes an equals() or not() function
    * is( 'utm_source' ).equals( ...
    * is( [ 'utm_source', 'utm_medium' ] ).not( ...
    *
@@ -489,6 +518,8 @@ var UTMManager = ( function() {
 
     return this;
   }
+
+
 
   /**
    * Verifies if one or more utm variables is equals the given value(s)
@@ -596,6 +627,8 @@ var UTMManager = ( function() {
     return this;
   }
 
+
+
   /**
    * Verifies if one or more utm variables is different from the given value(s)
    *
@@ -702,6 +735,8 @@ var UTMManager = ( function() {
     return this;
   }
 
+
+
   /**
    * Given the result of the last is() performed
    *
@@ -712,6 +747,7 @@ var UTMManager = ( function() {
   Kernel.prototype.result = function() {
     return this.booleanResult;
   }
+
 
 
   /**
@@ -730,6 +766,8 @@ var UTMManager = ( function() {
     return this;
   }
 
+
+
   /**
    * Executes the given function passing this as parameter when the result of is() is false
    *
@@ -746,6 +784,8 @@ var UTMManager = ( function() {
     return this;
   }
 
+
+
   /**
    * Executes the given function passing this as parameter
    *
@@ -761,6 +801,8 @@ var UTMManager = ( function() {
     }
     return this;
   }
+
+
 
   /**
    * Returns the variables and values in string format
