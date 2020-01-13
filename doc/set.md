@@ -86,3 +86,16 @@ utm.set( [ 'utm_source', 'utm_medium', 'utm_campaign', 'utm_term' ], [ 'google',
 var string = utm.toString();
 // return utm_source=google&utm_medium=cpc&utm_campaign=my-campaign&utm_term=term
 ```
+
+## Function signatures
+
+The following table presents all parameters combination that can be used in this function.
+
+| PARAMETERS           | SINCE | DESCRIPTION |
+| -------------------- | ----- | ----------- |
+| string, string       | 1.0.0 | Sets the value of a variable |
+| string, string, true | 1.0.0 | Sets the value of a variable. Creates the variable if it is undefined |
+| array, string        | 1.0.0 | Sets the value of multiple variables. |
+| array, string, true  | 1.0.0 | Sets the value of multiple variables. Creates the variables if it is undefined |
+| array, array         | 1.0.0 | Sets the value of a variable. Each variable will receive the value from the same array position from the variable name |
+| array, array, true   | 1.0.0 | Sets the value of a variable. Each variable will receive the value from the same array position from the variable name. Creates the variables if it is undefined |

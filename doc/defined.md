@@ -22,3 +22,11 @@ Obtaining the boolean result
 var result = utm.is( 'utm_source' ).defined().result();
 // true or false
 ```
+
+## Function signatures
+
+The following table presents all parameters combination that can be used in this function.
+
+| PARAMETERS | SINCE | DESCRIPTION |
+| ---------- | ----- | ----------- |
+|            | 1.0.0 | Verifies if the given variables in is() function is defined |

@@ -59,3 +59,13 @@ var variables = utm.get( [ 'utm_source', 'utm_medium', 'utm_term' ] )
   } );
 // return [ 'source', 'medium' ]
 ```
+
+## Function signatures
+
+The following table presents all parameters combination that can be used in this function.
+
+| PARAMETERS | SINCE | DESCRIPTION |
+| ---------- | ----- | ----------- |
+|            | 1.0.0 | Returns an array with all values from defined variables |
+| string     | 1.0.0 | Returns the value from the given variable |
+| array      | 1.0.0 | Returns an array with the values from the given variables |

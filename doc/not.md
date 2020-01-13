@@ -65,3 +65,12 @@ For example, verify if utm_source is different from both google or facebook and 
 ```javascript
 .is( [ 'utm_source', 'utm_medium' ] ).not( [ [ 'google', 'facebook' ], 'cpc' ] )
 ```
+
+## Function signatures
+
+The following table presents all parameters combination that can be used in this function.
+
+| PARAMETERS | SINCE | DESCRIPTION |
+| ---------- | ----- | ----------- |
+| string     | 1.0.0 | Compare the value of one variable |
+| array      | 1.0.0 | Compare the value for multiple variables |

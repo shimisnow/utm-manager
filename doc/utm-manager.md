@@ -88,3 +88,17 @@ var utm = UTMManager( 'https://domain.com/?utm_source=source&utm_medium=medium&u
 var string = utm.toString();
 // utm_source=source&utm_medium=medium&utm_campaign=campaign&variable=value
 ```
+
+## Function signatures
+
+The following table presents all parameters combination that can be used in this function.
+
+| PARAMETERS    | SINCE | DESCRIPTION |
+| ------------- | ----- | ----------- |
+|               | 1.0.0 | Extracts utm variables from page url |
+| string        | 1.0.0 | Extracts utm variables from the given string |
+| array         | 1.0.0 | Extracts utm variables and the variables given within the array from the page url |
+| string, array | 1.0.0 | Extracts utm variables and the variables given within the array from the given string |
+| url           | 1.0.0 | Extracts utm variables from the given url |
+| url, array    | 1.0.0 | Extracts utm variables and the variables given within the array from the given url |
+| json          | 1.0.0 | Saves all variables from the json |

@@ -65,3 +65,12 @@ For example, verify if utm_source is either google or facebook and if utm_medium
 ```javascript
 .is( [ 'utm_source', 'utm_medium' ] ).equals( [ [ 'google', 'facebook' ], 'cpc' ] )
 ```
+
+## Function signatures
+
+The following table presents all parameters combination that can be used in this function.
+
+| PARAMETERS | SINCE | DESCRIPTION |
+| ---------- | ----- | ----------- |
+| string     | 1.0.0 | Compare the value of one variable |
+| array      | 1.0.0 | Compare the value for multiple variables |
