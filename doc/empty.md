@@ -34,3 +34,11 @@ utm.is( 'utm_source' )
     console.log( 'it is empty' );
   } );
 ```
+
+## Function signatures
+
+The following table presents all parameters combination that can be used in this function.
+
+| PARAMETERS | SINCE | DESCRIPTION |
+| ---------- | ----- | ----------- |
+|            | 1.0.0 | Verifies if the given variables in is() function is empty |

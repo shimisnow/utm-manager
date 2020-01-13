@@ -85,3 +85,16 @@ utm.remove( [ 'utm_medium', 'utm_term' ], function( variable, value ) {
 var string = utm.toString();
 // return utm_source=source&utm_medium=medium&utm_campaign=campaign
 ```
+
+## Function signatures
+
+The following table presents all parameters combination that can be used in this function.
+
+| PARAMETERS       | SINCE | DESCRIPTION |
+| ---------------- | ----- | ----------- |
+|                  | 1.0.0 | Removes all variables |
+| function         | 1.0.0 | Removes the variables that returns true for the given filter |
+| string           | 1.0.0 | Remove one variable |
+| string, function | 1.0.0 | Removes one variable if it returns true for the given filter |
+| array            | 1.0.0 | Remove multiple variables |
+| array, function  | 1.0.0 | Removes the given variables that returns true for the given filter |

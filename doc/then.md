@@ -35,3 +35,11 @@ utm.is( 'utm_source' )
     console.log( 'source is facebook' );
   } );
 ```
+
+## Function signatures
+
+The following table presents all parameters combination that can be used in this function.
+
+| PARAMETERS | SINCE | DESCRIPTION |
+| ---------- | ----- | ----------- |
+| function   | 1.0.0 | Executes the given function if the performed comparison returns true |

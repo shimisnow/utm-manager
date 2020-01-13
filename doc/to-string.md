@@ -60,3 +60,12 @@ var result = utm.toString( {
 } );
 // utm_medium=cpc<>utm_term=
 ```
+
+## Function signatures
+
+The following table presents all parameters combination that can be used in this function.
+
+| PARAMETERS | SINCE | DESCRIPTION |
+| ---------- | ----- | ----------- |
+|            | 1.0.0 | Returns all defined variables and values with default configuration |
+| json       | 1.0.0 | Returns one or more variables and values according to the given configuration |

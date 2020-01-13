@@ -19,3 +19,12 @@ Verify multiple variables
 ```javascript
 .is( [ 'utm_source', 'utm_medium' ] )
 ```
+
+## Function signatures
+
+The following table presents all parameters combination that can be used in this function.
+
+| PARAMETERS | SINCE | DESCRIPTION |
+| ---------- | ----- | ----------- |
+| string     | 1.0.0 | Process one variable |
+| array      | 1.0.0 | Process multiple variables |
