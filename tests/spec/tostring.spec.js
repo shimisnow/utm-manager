@@ -61,7 +61,7 @@ describe( 'UTM Manager Test - toString()', function() {
 		const utm = UTMManager( string );
 		expect( utm.toString( {
 			utm : [ 'utm_term' ],
-			empty : true
+			undefined : true
 		} ) ).toBe( 'utm_term=' );
 	} );
 
@@ -70,7 +70,7 @@ describe( 'UTM Manager Test - toString()', function() {
 		const utm = UTMManager( string );
 		expect( utm.toString( {
 			utm : [ 'utm_term', 'utm_source', 'utm_campaign' ],
-			empty : true
+			undefined : true
 		} ) ).toBe( 'utm_term=&utm_source=source&utm_campaign=campaign' );
 	} );
 

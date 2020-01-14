@@ -5,6 +5,14 @@ var UTMManager = ( function() {
     // current library version
 		this.version = '1.0.0';
 
+    this.config = {
+      variables : [ 'utm_source', 'utm_medium', 'utm_campaign', 'utm_term', 'utm_content' ],
+      tostring : {
+        glue : '&',
+        undefined : false
+      }
+    };
+
     // stores all parsed variables
     this.variables = {};
 
@@ -74,8 +82,8 @@ var UTMManager = ( function() {
       variables = parts[ 1 ].split( '#' )[ 0 ];
     }
 
-    // valid variables to utm
-    var valid = [ 'utm_source', 'utm_medium', 'utm_campaign', 'utm_term', 'utm_content' ];
+    // valid utm variables
+    var valid = this.config.variables;
 
     if( typeof extended !== 'undefined' && Array.isArray( extended ) ) {
       valid = valid.concat( extended );
@@ -818,7 +826,7 @@ var UTMManager = ( function() {
    * @param {JSON} options A JSON object with three optional keys
    * @param {String|Array} options.utm Single (string) or multple (array) utm variables to be concated
    * @param {String} options.glue Separator for the utm variables
-   * @param {boolean} options.empty True to concat a utm varible even if it is undefined
+   * @param {boolean} options.undefined True to concat a utm varible even if it is undefined
    *
    * @returns {String} The result of the concat process
    */
@@ -832,12 +840,12 @@ var UTMManager = ( function() {
 
     // used in join()
     if( typeof options.glue === 'undefined' ) {
-      options.glue = '&';
+      options.glue = this.config.tostring.glue;
     }
 
     // if it is to display utm_variables that is not defined or empty
-    if( typeof options.empty === 'undefined' ) {
-      options.empty = false;
+    if( typeof options.undefined === 'undefined' ) {
+      options.undefined = this.config.tostring.undefined;
     }
 
     // concat all the defined utm variables
@@ -861,9 +869,9 @@ var UTMManager = ( function() {
 
           result = options.utm + '=' + this.variables[ options.utm ];
 
-        // if the empty flag is set to true, concat the variable even if it is undefined
+        // if the undefined flag is set to true, concat the variable even if it is undefined
         } else {
-          if( options.empty ) {
+          if( options.undefined ) {
             result = options.utm + '=';
           }
         }
@@ -879,9 +887,9 @@ var UTMManager = ( function() {
 
             result.push( options.utm[ i ] + '=' + this.variables[ options.utm[ i ] ] );
 
-          // if the empty flag is set to true, concat the variable even if it is undefined
+          // if the undefined flag is set to true, concat the variable even if it is undefined
           } else {
-            if( options.empty ) {
+            if( options.undefined ) {
               result.push( options.utm[ i ] + '=' );
             }
           }

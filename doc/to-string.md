@@ -43,7 +43,7 @@ var result = utm.toString( {
 
 result = utm.toString( {
   utm : [ 'utm_source', 'utm_medium', 'utm_term' ],
-  empty: true
+  undefined : true
 } );
 // utm_source=google&utm_medium=cpc&utm_term=
 ```
@@ -55,7 +55,7 @@ const utm = UTMManager( 'utm_source=google&utm_medium=cpc' );
 
 var result = utm.toString( {
   utm : [ 'utm_medium', 'utm_term' ]
-  empty: true,
+  undefined : true,
   glue : '<>'
 } );
 // utm_medium=cpc<>utm_term=
