@@ -3,7 +3,7 @@ var UTMManager = ( function() {
   var Kernel = function( utm, extended ) {
 
     // current library version
-		this.version = '1.0.0';
+		this.version = '1.1.0';
 
     this.config = {
       variables : [ 'utm_source', 'utm_medium', 'utm_campaign', 'utm_term', 'utm_content' ],
