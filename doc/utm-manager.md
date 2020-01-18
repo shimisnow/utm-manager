@@ -4,12 +4,12 @@
 
 ## How to use
 
-### Extract utm variables from the page url
+### Extract variables from the page url
 
 ```javascript
 var utm = UTMManager();
 // will process the value of window.location.href
-// Ex: https://domain.com/?utm_source=source&utm_medium=medium&utm_campaign=campaign&variable=value
+// Ex: https://domain.com/?utm_source=source&utm_medium=medium&utm_campaign=campaign&variable=value&another=value
 
 var string = utm.toString();
 // utm_source=source&utm_medium=medium&utm_campaign=campaign
@@ -19,86 +19,134 @@ Variables that is not from utm can also be extracted. For this, an array with th
 
 ```javascript
 var utm = UTMManager( [ 'variable' ] );
-// will process the value of window.location.href
-// Ex: https://domain.com/?utm_source=source&utm_medium=medium&utm_campaign=campaign&variable=value
+// will process the value of window.location.href and extract all utm variable plus the 'variable'
+// Ex: https://domain.com/?utm_source=source&utm_medium=medium&utm_campaign=campaign&variable=value&another=value
 
 var string = utm.toString();
 // utm_source=source&utm_medium=medium&utm_campaign=campaign&variable=value
 ```
 
-### Extract utm from a string with variables
+To extract all variables, the parameter must be a string with value `all`.
 
 ```javascript
-var utm = UTMManager( 'utm_source=source&utm_medium=medium&utm_campaign=campaign&variable=value' );
+var utm = UTMManager( 'all' );
+// will process the value of window.location.href and extract all variables
+// Ex: https://domain.com/?utm_source=source&utm_medium=medium&utm_campaign=campaign&variable=value&another=value
+
+var string = utm.toString();
+// utm_source=source&utm_medium=medium&utm_campaign=campaign&variable=value&another=value
+```
+
+### Extract from a string with variables
+
+```javascript
+var utm = UTMManager( 'utm_source=source&utm_medium=medium&utm_campaign=campaign&variable=value&another=value' );
 
 var string = utm.toString();
 // utm_source=source&utm_medium=medium&utm_campaign=campaign
 ```
 
-Variables that is not from utm can also be extracted. For this, an array with the variables name must be given as parameter.
+Variables that is not from utm can also be extracted. For this, an array with the variables name must be given as the second parameter.
 
 ```javascript
-var utm = UTMManager( 'utm_source=source&utm_medium=medium&utm_campaign=campaign&variable=value', [ 'variable' ] );
+var utm = UTMManager( 'utm_source=source&utm_medium=medium&utm_campaign=campaign&variable=value&another=value', [ 'variable' ] );
 
 var string = utm.toString();
 // utm_source=source&utm_medium=medium&utm_campaign=campaign&variable=value
 ```
 
-### Set the variables from a JSON
+To extract all variables, the second parameter must be a string with value `all`.
 
 ```javascript
-var utm = UTMManager( {
-  'utm_source' : 'source',
-  'utm_medium' : 'medium',
-  'utm_campaign' : 'campaign'
-} );
+var utm = UTMManager( 'utm_source=source&utm_medium=medium&utm_campaign=campaign&variable=value&another=value', 'all' );
+
+var string = utm.toString();
+// utm_source=source&utm_medium=medium&utm_campaign=campaign&variable=value&another=value
+```
+
+### Extract utm from the given url
+
+```javascript
+var utm = UTMManager( 'https://domain.com/?utm_source=source&utm_medium=medium&utm_campaign=campaign&variable=value&another=value' );
 
 var string = utm.toString();
 // utm_source=source&utm_medium=medium&utm_campaign=campaign
 ```
 
-The given variables in the json are not filtered, so if a non utm variable is present, that will be saved.
+Variables that is not from utm can also be extracted. For this, an array with the variables name must be given as the second parameter.
+
+```javascript
+var utm = UTMManager( 'https://domain.com/?utm_source=source&utm_medium=medium&utm_campaign=campaign&variable=value&another=value', [ 'variable' ] );
+
+var string = utm.toString();
+// utm_source=source&utm_medium=medium&utm_campaign=campaign&variable=value
+```
+
+To extract all variables, the second parameter must be a string with value `all`.
+
+```javascript
+var utm = UTMManager( 'https://domain.com/?utm_source=source&utm_medium=medium&utm_campaign=campaign&variable=value&another=value', 'all' );
+
+var string = utm.toString();
+// utm_source=source&utm_medium=medium&utm_campaign=campaign&variable=value&another=value
+```
+
+### Extract from a json
 
 ```javascript
 var utm = UTMManager( {
   'utm_source' : 'source',
   'utm_medium' : 'medium',
   'utm_campaign' : 'campaign',
-  'variable' : 'value'
+  'variable' : 'value',
+  'another' : 'value'
 } );
-
-var string = utm.toString();
-// utm_source=source&utm_medium=medium&utm_campaign=campaign&variable=value
-```
-
-### Extract utm from the given url
-
-```javascript
-var utm = UTMManager( 'https://domain.com/?utm_source=source&utm_medium=medium&utm_campaign=campaign&variable=value' );
 
 var string = utm.toString();
 // utm_source=source&utm_medium=medium&utm_campaign=campaign
 ```
 
-Variables that is not from utm can also be extracted. For this, an array with the variables name must be given as parameter.
+Variables that is not from utm can also be extracted. For this, an array with the variables name must be given as the second parameter.
 
 ```javascript
-var utm = UTMManager( 'https://domain.com/?utm_source=source&utm_medium=medium&utm_campaign=campaign&variable=value', [ 'variable' ] );
+var utm = UTMManager( {
+  'utm_source' : 'source',
+  'utm_medium' : 'medium',
+  'utm_campaign' : 'campaign',
+  'variable' : 'value',
+  'another' : 'value'
+}, [ 'variable' ] );
 
 var string = utm.toString();
 // utm_source=source&utm_medium=medium&utm_campaign=campaign&variable=value
+```
+
+To extract all variables, the second parameter must be a string with value `all`.
+
+```javascript
+var utm = UTMManager( {
+  'utm_source' : 'source',
+  'utm_medium' : 'medium',
+  'utm_campaign' : 'campaign',
+  'variable' : 'value',
+  'another' : 'value'
+}, 'all' );
+
+var string = utm.toString();
+// utm_source=source&utm_medium=medium&utm_campaign=campaign&variable=value&another=value
 ```
 
 ## Function signatures
 
 The following table presents all parameters combination that can be used in this function.
 
-| PARAMETERS    | SINCE | DESCRIPTION |
-| ------------- | ----- | ----------- |
-|               | 1.0.0 | Extracts utm variables from page url |
-| string        | 1.0.0 | Extracts utm variables from the given string |
-| array         | 1.0.0 | Extracts utm variables and the variables given within the array from the page url |
-| string, array | 1.0.0 | Extracts utm variables and the variables given within the array from the given string |
-| url           | 1.0.0 | Extracts utm variables from the given url |
-| url, array    | 1.0.0 | Extracts utm variables and the variables given within the array from the given url |
-| json          | 1.0.0 | Saves all variables from the json |
+| PARAMETERS     | SINCE | DESCRIPTION |
+| -------------- | ----- | ----------- |
+|                | 1.0.0 | Extracts utm variables from page url |
+| string         | 1.0.0 | Extracts utm variables from the given string |
+| string, array  | 1.0.0 | Extracts utm variables and the variables given within the array from the given string |
+| string, string | 1.1.0 | Extracts all variables. The second parameter must be passed with the value 'all' |
+| array          | 1.0.0 | Extracts utm variables and the variables given within the array from the page url |
+| json           | 1.0.0 | Extracts utm variables from the given json |
+| json, array    | 1.1.0 | Extracts utm variables and the variables given within the array from the given json |
+| json, string   | 1.1.0 | Extracts all variables. The second parameter must be passed with the value 'all' |

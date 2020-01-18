@@ -54,14 +54,36 @@ describe( 'UTM Manager Test - UTMManager()', function() {
 		expect( utm.toString() ).toBe( 'utm_source=source&utm_medium=medium&utm_campaign=campaign' );
 	} );
 
-	it( 'UTMManager() - json variables (other stuff too)', function() {
+	it( 'UTMManager() - json variables (extract only utm)', function() {
 		const utm = UTMManager( {
 			'utm_source'   : 'source',
 			'utm_medium'   : 'medium',
 			'utm_campaign' : 'campaign',
 			'random_variable' : 'random'
 		} );
-		expect( utm.toString() ).toBe( 'utm_source=source&utm_medium=medium&utm_campaign=campaign&random_variable=random' );
+		expect( utm.toString() ).toBe( 'utm_source=source&utm_medium=medium&utm_campaign=campaign' );
+	} );
+
+	it( 'UTMManager() - json variables (extract utm and some variable)', function() {
+		const utm = UTMManager( {
+			'utm_source'   : 'source',
+			'utm_medium'   : 'medium',
+			'utm_campaign' : 'campaign',
+			'random_variable' : 'random',
+			'another_variable' : 'another'
+		}, [ 'another_variable' ] );
+		expect( utm.toString() ).toBe( 'utm_source=source&utm_medium=medium&utm_campaign=campaign&another_variable=another' );
+	} );
+
+	it( 'UTMManager() - json variables (extract all variables)', function() {
+		const utm = UTMManager( {
+			'utm_source'   : 'source',
+			'utm_medium'   : 'medium',
+			'utm_campaign' : 'campaign',
+			'random_variable' : 'random',
+			'another_variable' : 'another'
+		}, 'all' );
+		expect( utm.toString() ).toBe( 'utm_source=source&utm_medium=medium&utm_campaign=campaign&random_variable=random&another_variable=another' );
 	} );
 
 } );
