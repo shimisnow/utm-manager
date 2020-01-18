@@ -28,7 +28,7 @@ var term = '';
 
 // get utm_term if it exists and has value
 utm.is( 'utm_term' )
-  .defined().and().not( '' )
+  .filled()
   .then( function() {
     term = utm.get( 'utm_term' );
   } );
@@ -42,21 +42,23 @@ UTMManager's documentation is included in the directory [doc](doc/) and each fun
 
 #### Basic
 
-| function                         | since |      |
-| :------------------------------: | :---: | :--- |
+| function                             | since |      |
+| :----------------------------------: | :---: | :--- |
 | [`UTMManager()`](doc/utm-manager.md) | 1.0.0 | Parses an URL or string and extract the utm variables |
 | [`get()`](doc/get.md)                | 1.0.0 | Returns the value of one or more variables |
 | [`set()`](doc/set.md)                | 1.0.0 | Sets the value of one or more variables |
-| [`remove()`](doc/remove.md)          | 1.0.0 | Remove one or more variables from the UTMManager object |
+| [`add()`](doc/add.md)                | 1.1.0 | Adds one or more variables |
+| [`remove()`](doc/remove.md)          | 1.0.0 | Removes one or more variables |
 | [`toString()`](doc/to-string.md)     | 1.0.0 | Returns some or all variables grouped as a string |
 
 #### Advanced
 
-| function                           | since |      |
-| :--------------------------------: | :---: | :--- |
+| function                               | since |      |
+| :------------------------------------: | :---: | :--- |
 | [`is().defined()`](doc/defined.md)     | 1.0.0 | Verifies if one or more variables are defined |
 | [`is().undefined()`](doc/undefined.md) | 1.0.0 | Verifies if one or more variables are undefined |
 | [`is().empty()`](doc/empty.md)         | 1.0.0 | Verifies if one or more variables are empty |
+| [`is().filled()`](doc/filled.md)       | 1.1.0 | Verifies if one or more variables are defined and has value |
 | [`is().equals()`](doc/equals.md)       | 1.0.0 | Verifies if one or more variables are equals the given value |
 | [`is().not()`](doc/not.md)             | 1.0.0 | Verifies if all given variables are different from the given value |
 | [`then()`](doc/then.md)                | 1.0.0 | Execute if the performed verification with is() return true |
@@ -64,6 +66,7 @@ UTMManager's documentation is included in the directory [doc](doc/) and each fun
 | [`always()`](doc/always.md)            | 1.0.0 | Execute if the performed verification with is() return either true or false |
 | [`and()`](doc/and.md)                  | 1.0.0 | Performs an and operation with the result of two verification with is() |
 | [`or()`](doc/or.md)                    | 1.0.0 | Performs an or operation with the result of two verification with is() |
+| [`sort()`](doc/sort.md)                | 1.1.0 | Sorts the variables |
 
 ## Versioning
 
