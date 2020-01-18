@@ -34,7 +34,7 @@ utm.is( 'utm_term' )
   } );
 ```
 
-The given examples are the simple ones. Read the documentation for the real thing.
+The given examples are the simple ones. Read the [basic section](examples/basic.md) and [advanced section](examples/advanced.md) for more examples.
 
 ## Documentation
 
