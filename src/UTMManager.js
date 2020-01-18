@@ -7,6 +7,8 @@ var UTMManager = ( function() {
 
     this.config = {
       variables : [ 'utm_source', 'utm_medium', 'utm_campaign', 'utm_term', 'utm_content' ],
+      sort : 'strict',
+      strict : [ 'utm_source', 'utm_medium', 'utm_campaign', 'utm_term', 'utm_content' ],
       tostring : {
         glue : '&',
         undefined : false
@@ -38,17 +40,33 @@ var UTMManager = ( function() {
       // if a string, parses the string content
       if( typeof utm === 'string' ) {
 
-        this.parse( utm, extended );
+        if( utm == 'all' ) {
+          this.parse( window.location.href, 'all' );
+        } else {
+          this.parse( utm, extended );
+        }
 
       // if an array, parse the page URL with extended variables
       } else if( Array.isArray( utm ) ) {
 
         this.parse( window.location.href, utm );
 
-      } else {
+      } else if( typeof utm === 'object' ) {
 
-        //expect utm to be a json object
-        this.variables = utm;
+        // expects a JSON object and transforms it in a string
+        // the transformation follows:
+        // JSON.stringify( utm );
+        // result = {"utm_source":"source","utm_medium":"medium"}
+        // .replace( /"|{|}/g, '' );
+        // result = utm_source:source,utm_medium:medium
+        // .replace( /:/g, '=' )
+        // result = utm_source=source,utm_medium=medium
+        // .replace( /,/g, '&' )
+        // result = utm_source=source&utm_medium=medium
+
+        var string = JSON.stringify( utm ).replace( /"|{|}/g, '' ).replace( /:/g, '=' ).replace( /,/g, '&' );
+
+        this.parse( string, extended );
       }
     } else {
 
@@ -75,27 +93,53 @@ var UTMManager = ( function() {
    */
   Kernel.prototype.parse = function( variables, extended ) {
 
-    var parts = decodeURIComponent( variables ).split( '?' );
-
-    if( parts.length == 2 ) {
-      // split by hash symbol to get ONLY the real variables part
-      variables = parts[ 1 ].split( '#' )[ 0 ];
-    }
-
-    // valid utm variables
-    var valid = this.config.variables;
-
-    if( typeof extended !== 'undefined' && Array.isArray( extended ) ) {
-      valid = valid.concat( extended );
-    }
-
     if( typeof variables !== 'undefined' ) {
+
+      var parts = decodeURIComponent( variables ).split( '?' );
+
+      if( parts.length == 2 ) {
+        // split by hash symbol to get ONLY the real variables part
+        variables = parts[ 1 ].split( '#' )[ 0 ];
+      }
+
       variables = variables.split( '&' );
-      for( i = 0; i < variables.length; i++ ) {
-        var pair = variables[ i ].split( '=' );
-        //verifies if variable name is a utm variable
-        if( valid.indexOf( pair[ 0 ] ) >= 0 ) {
-          this.variables[ pair[ 0 ] ] = pair[ 1 ];
+
+      // it is only to process the given string
+      if( typeof extended === 'undefined' ) {
+
+        // valid variables defined in config
+        // it can be only utm variables (default) or something else if config() was used
+        var valid = this.config.variables;
+
+        for( i = 0; i < variables.length; i++ ) {
+          var pair = variables[ i ].split( '=' );
+          if( valid.indexOf( pair[ 0 ] ) >= 0 ) {
+            this.variables[ pair[ 0 ] ] = pair[ 1 ];
+          }
+        }
+
+      // some configuration was passed
+      } else {
+
+        // tells the algorithm to extract all variables from the string
+        if( typeof extended === 'string' && extended == 'all' ) {
+          for( i = 0; i < variables.length; i++ ) {
+            var pair = variables[ i ].split( '=' );
+            this.variables[ pair[ 0 ] ] = pair[ 1 ];
+          }
+
+        // tells the algorithm to extract only some variables from the string
+        } else if( Array.isArray( extended ) ) {
+
+          var valid = this.config.variables;
+          valid = valid.concat( extended );
+
+          for( i = 0; i < variables.length; i++ ) {
+            var pair = variables[ i ].split( '=' );
+            if( valid.indexOf( pair[ 0 ] ) >= 0 ) {
+              this.variables[ pair[ 0 ] ] = pair[ 1 ];
+            }
+          }
         }
       }
     }
@@ -270,6 +314,67 @@ var UTMManager = ( function() {
 
 
   /**
+   * Verify if the variable(s) informed in the function is() is defined and has value
+   *
+   * @since 1.1.0
+   *
+   * @returns {UTMManager} Return an UTMManager object (this)
+   */
+  Kernel.prototype.filled = function() {
+
+    var result = true;
+
+    // runtime.is = the utm variable(s) informed as parameter in is()
+    if( typeof this.runtime.is !== 'undefined' ) {
+
+      // just one utm variable used in the function is()
+      if( typeof this.runtime.is === 'string' ) {
+
+        // verifies only one utm variable
+        if( typeof this.variables[ this.runtime.is ] !== 'undefined' ) {
+
+            result = ( this.variables[ this.runtime.is ] != '' );
+        } else {
+          result = false;
+        }
+
+      // multiple utm variables used in the function is()
+      } else if( Array.isArray( this.runtime.is ) ) {
+
+        for( i = 0; i < this.runtime.is.length; i++ ) {
+          if( typeof this.variables[ this.runtime.is[ i ] ] !== 'undefined' ) {
+            if( this.variables[ this.runtime.is[ i ] ] == '' ) {
+              result = false;
+              i = this.runtime.is.length;
+            }
+          } else {
+            result = false;
+            i = this.runtime.is.length;
+          }
+        }
+      }
+    }
+
+    // if and() was used
+    if( this.runtime.and !== null ) {
+      result = ( result && this.booleanResult );
+
+    // if or() was used
+    } else if( this.runtime.or !== null ) {
+      result = ( result || this.booleanResult );
+    }
+
+    // clear the state of and() and or()
+    this.runtime.and = this.runtime.or = null;
+
+    this.booleanResult = result;
+
+    return this;
+  }
+
+
+
+  /**
    * Get the value of a variable(s)
    *
    * @since 1.0.0
@@ -396,6 +501,67 @@ var UTMManager = ( function() {
 
 
   /**
+   * Add a variable. Do not update if it exists
+   *
+   * @since 1.1.0
+   *
+   * @param {String} variables Variable(s) to be create
+   * @param {String} values Value(s) to be used
+   *
+   * @returns {UTMManager} Return an UTMManager object (this)
+   */
+  Kernel.prototype.add = function( variables, values ) {
+
+    // do not accept undefined parameters
+    if( typeof variables !== 'undefined' && typeof values !== 'undefined' ) {
+
+      // only one variable
+      if( typeof variables === 'string' ) {
+
+        // only one value
+        // do not accept multiple values because this do not make sense
+        if( typeof values === 'string' ) {
+
+          // if the variables do not exists, create
+          if( typeof this.variables[ variables ] === 'undefined' ) {
+            this.variables[ variables ] = values;
+          }
+        }
+
+      // multiple variables
+      } else if( Array.isArray( variables ) ) {
+
+        // one value
+        // in this case all informed variables, if do no exists, will be create with the same value
+        if( typeof values  === 'string' ) {
+
+          for( i = 0; i < variables.length; i++ ) {
+            if( typeof this.variables[ variables[ i ] ] === 'undefined' ) {
+              this.variables[ variables[ i ] ] = values;
+            }
+          }
+
+        // multiple variables and multiple values
+        } else if( Array.isArray( values ) ) {
+
+          // each position of variables array will be mapped with the same position in the values array
+          if( variables.length == values.length ) {
+
+            for( i = 0; i < variables.length; i++ ) {
+              if( typeof this.variables[ variables[ i ] ] === 'undefined' ) {
+                this.variables[ variables[ i ] ] = values[ i ];
+              }
+            }
+          }
+        }
+      }
+    }
+
+    return this;
+  }
+
+
+  /**
    * Remove one or more variables. A filter can be used to remove with a condition
    *
    * @since 1.0.0
@@ -465,6 +631,66 @@ var UTMManager = ( function() {
     } else {
       this.variables = {};
     }
+
+    return this;
+  }
+
+
+
+  Kernel.prototype.sort = function( order ) {
+
+    if( typeof order === 'undefined' ) {
+      order = this.config.sort;
+    }
+
+    if( typeof order === 'string' ) {
+
+      switch( order ) {
+      case 'strict' :
+      case 'strict-lexical' :
+
+        var strict = this.config.strict;
+
+        var extended = Object.keys( this.variables ).filter( function( value ) {
+          return ( strict.indexOf( value ) < 0 );
+        } );
+
+        var tmp = {};
+
+        for( var i = 0; i < strict.length; i++ ) {
+          if( typeof this.variables[ strict[ i ] ] !== 'undefined' ) {
+            tmp[ strict[ i ] ] = this.variables[ strict[ i ] ];
+          }
+        }
+
+        if( order == 'strict-lexical' ) {
+          extended = extended.sort();
+        }
+
+        for( var i = 0; i < extended.length; i++ ) {
+          tmp[ extended[ i ] ] = this.variables[ extended[ i ] ];
+        }
+
+        this.variables = tmp;
+
+      break;
+      case 'lexical' :
+
+        var keys = Object.keys( this.variables ).sort();
+
+        var tmp = {};
+
+        for( var i = 0; i < keys.length; i++ ) {
+          tmp[ keys[ i ] ] = this.variables[ keys[ i ] ];
+        }
+
+        this.variables = tmp;
+
+      break;
+      }
+    }
+
+    // necessário fazer para quando o parâmetro for array
 
     return this;
   }
