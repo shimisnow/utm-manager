@@ -1,0 +1,27 @@
+version: '3.8'
+
+services:
+
+  install:
+    image: node:16.11.1
+    user: node
+    working_dir: /home/node/app
+    volumes:
+      - ./:/home/node/app
+    command: npm install
+
+  compile:
+    image: node:16.11.1
+    user: node
+    working_dir: /home/node/app
+    volumes:
+      - ./:/home/node/app
+    command: npx gulp
+
+  test:
+    image: node:16.11.1
+    user: node
+    working_dir: /home/node/app
+    volumes:
+      - ./:/home/node/app
+    command: npx jasmine tests/jasmine/*.spec.js
