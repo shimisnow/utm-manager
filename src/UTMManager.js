@@ -1,37 +1,56 @@
-var UTMManager = ( function() {
+(function(global, factory) {
+  if(typeof exports === 'object' && typeof module !== 'undefined') {
+    module.exports=factory()
+  }else if(typeof define === 'function' && define.amd) {
+    define(factory)
+  } else {
+    global.UTMManager = factory()
+  }
+})(this, function(){
 
-  var Kernel = function( utm, extended ) {
+  let UTMManager = function(utm, extended) {
 
-    // current library version
-		this.version = '1.1.0';
+    this.version = '1.1.0'
 
     this.config = {
-      variables : [ 'utm_source', 'utm_medium', 'utm_campaign', 'utm_term', 'utm_content' ],
-      sort : 'strict',
-      strict : [ 'utm_source', 'utm_medium', 'utm_campaign', 'utm_term', 'utm_content' ],
-      tostring : {
-        glue : '&',
-        undefined : false
+      variables: [
+        'utm_source',
+        'utm_medium',
+        'utm_campaign',
+        'utm_term',
+        'utm_content'
+      ],
+      sort: 'strict',
+      strict: [
+        'utm_source',
+        'utm_medium',
+        'utm_campaign',
+        'utm_term',
+        'utm_content'
+      ],
+      tostring: {
+        glue: '&',
+        undefined: false
       }
-    };
+    }
 
     // stores all parsed variables
-    this.variables = {};
+    this.variables = {}
 
     // stores the result of an operation with is()
-    this.booleanResult = false;
+    this.booleanResult = false
 
     // stores information about is() and() e or()
     this.runtime = {
       // stores the value passed in is()
       // this can be a string or an array
-      is  : null,
+      is : null,
       // stores if the function and() was used
       // this can be null or true
-      and : null,
+      and: null,
       // stores if the function or() was used
       // this can be null or true
-      or  : null
+      or: null
     }
 
     // if parameter utm is undefined, parse the page URL
@@ -41,9 +60,9 @@ var UTMManager = ( function() {
       if( typeof utm === 'string' ) {
 
         if( utm == 'all' ) {
-          this.parse( window.location.href, 'all' );
+          this.parse( window.location.href, 'all' )
         } else {
-          this.parse( utm, extended );
+          this.parse( utm, extended )
         }
 
       // if an array, parse the page URL with extended variables
@@ -74,10 +93,7 @@ var UTMManager = ( function() {
       this.parse( window.location.href );
     }
 
-		return this;
-	};
-
-
+  }
 
   /**
    * Parses a string with URL formatted variables or an URL to extract only the ones related with utm. If a set of variables is informed in the extended parameter, the will be extracted too.
@@ -91,7 +107,7 @@ var UTMManager = ( function() {
    *
    * @returns {UTMManager} Return an UTMManager object (this)
    */
-  Kernel.prototype.parse = function( variables, extended ) {
+   UTMManager.prototype.parse = function( variables, extended ) {
 
     if( typeof variables !== 'undefined' ) {
 
@@ -157,7 +173,7 @@ var UTMManager = ( function() {
    *
    * @returns {UTMManager} Return an UTMManager object (this)
    */
-  Kernel.prototype.defined = function() {
+  UTMManager.prototype.defined = function() {
 
     var result = true;
 
@@ -210,7 +226,7 @@ var UTMManager = ( function() {
    *
    * @returns {UTMManager} Return an UTMManager object (this)
    */
-  Kernel.prototype.undefined = function() {
+  UTMManager.prototype.undefined = function() {
 
     var result = true;
 
@@ -264,7 +280,7 @@ var UTMManager = ( function() {
    *
    * @returns {UTMManager} Return an UTMManager object (this)
    */
-  Kernel.prototype.empty = function() {
+  UTMManager.prototype.empty = function() {
 
     var result = true;
 
@@ -320,7 +336,7 @@ var UTMManager = ( function() {
    *
    * @returns {UTMManager} Return an UTMManager object (this)
    */
-  Kernel.prototype.filled = function() {
+  UTMManager.prototype.filled = function() {
 
     var result = true;
 
@@ -383,7 +399,7 @@ var UTMManager = ( function() {
    *
    * @returns {String|Array} Single value (string) or mutiple values (array). If a variable do not exists, the value undefined will be returned for one variable and, if a set of variables was requested, the position of the array for the variable will be undefined.
    */
-  Kernel.prototype.get = function( utm ) {
+  UTMManager.prototype.get = function( utm ) {
 
     var result = '';
 
@@ -422,7 +438,7 @@ var UTMManager = ( function() {
    *
    * @returns {UTMManager} Return an UTMManager object (this)
    */
-  Kernel.prototype.set = function( variables, values, create ) {
+  UTMManager.prototype.set = function( variables, values, create ) {
 
     // do not accept undefined parameters
     if( typeof variables !== 'undefined' && typeof values !== 'undefined' ) {
@@ -510,7 +526,7 @@ var UTMManager = ( function() {
    *
    * @returns {UTMManager} Return an UTMManager object (this)
    */
-  Kernel.prototype.add = function( variables, values ) {
+  UTMManager.prototype.add = function( variables, values ) {
 
     // do not accept undefined parameters
     if( typeof variables !== 'undefined' && typeof values !== 'undefined' ) {
@@ -571,7 +587,7 @@ var UTMManager = ( function() {
    *
    * @returns {UTMManager} Return an UTMManager object (this)
    */
-  Kernel.prototype.remove = function( elements, filter ) {
+  UTMManager.prototype.remove = function( elements, filter ) {
 
     if( typeof elements !== 'undefined' ) {
 
@@ -637,7 +653,7 @@ var UTMManager = ( function() {
 
 
 
-  Kernel.prototype.sort = function( order ) {
+  UTMManager.prototype.sort = function( order ) {
 
     if( typeof order === 'undefined' ) {
       order = this.config.sort;
@@ -706,7 +722,7 @@ var UTMManager = ( function() {
    *
    * @returns {UTMManager} Return an UTMManager object (this)
    */
-  Kernel.prototype.and = function( scalar ) {
+  UTMManager.prototype.and = function( scalar ) {
     if( typeof scalar === 'boolean' ) {
       this.booleanResult = this.booleanResult && scalar;
     } else {
@@ -726,7 +742,7 @@ var UTMManager = ( function() {
    *
    * @returns {UTMManager} Return an UTMManager object (this)
    */
-  Kernel.prototype.or = function( scalar ) {
+  UTMManager.prototype.or = function( scalar ) {
     if( typeof scalar === 'boolean' ) {
       this.booleanResult = this.booleanResult || scalar;
     } else {
@@ -748,7 +764,7 @@ var UTMManager = ( function() {
    * @param {String|Array} utm One (string) or multiple (array) utm variables
    * @returns {UTMManager} Return an UTMManager object (this)
    */
-  Kernel.prototype.is = function( utm ) {
+  UTMManager.prototype.is = function( utm ) {
 
     if( typeof utm === 'undefined' ) {
       this.runtime.is = null;
@@ -770,7 +786,7 @@ var UTMManager = ( function() {
    *
    * @returns {UTMManager} Return an UTMManager object (this)
    */
-  Kernel.prototype.equals = function( utm ) {
+  UTMManager.prototype.equals = function( utm ) {
 
     var result = false;
 
@@ -878,7 +894,7 @@ var UTMManager = ( function() {
    *
    * @returns {UTMManager} Return an UTMManager object (this)
    */
-  Kernel.prototype.not = function( utm ) {
+  UTMManager.prototype.not = function( utm ) {
 
     var result = false;
 
@@ -984,7 +1000,7 @@ var UTMManager = ( function() {
    *
    * @returns {boolean} Return result of the last is() performed
    */
-  Kernel.prototype.result = function() {
+  UTMManager.prototype.result = function() {
     return this.booleanResult;
   }
 
@@ -999,7 +1015,7 @@ var UTMManager = ( function() {
    *
    * @returns {UTMManager} Return an UTMManager object (this)
    */
-  Kernel.prototype.then = function( fn ) {
+  UTMManager.prototype.then = function( fn ) {
     if( this.booleanResult && typeof fn === 'function' ) {
       fn( this );
     }
@@ -1017,7 +1033,7 @@ var UTMManager = ( function() {
    *
    * @returns {UTMManager} Return an UTMManager object (this)
    */
-  Kernel.prototype.otherwise = function( fn ) {
+  UTMManager.prototype.otherwise = function( fn ) {
     if( this.booleanResult == false && typeof fn === 'function' ) {
       fn( this );
     }
@@ -1035,7 +1051,7 @@ var UTMManager = ( function() {
    *
    * @returns {UTMManager} Return an UTMManager object (this)
    */
-  Kernel.prototype.always = function( fn ) {
+  UTMManager.prototype.always = function( fn ) {
     if( typeof fn === 'function' ) {
       fn( this );
     }
@@ -1056,7 +1072,7 @@ var UTMManager = ( function() {
    *
    * @returns {String} The result of the concat process
    */
-  Kernel.prototype.toString = function( options ) {
+  UTMManager.prototype.toString = function( options ) {
 
     var result= '';
 
@@ -1128,8 +1144,5 @@ var UTMManager = ( function() {
     return result;
   }
 
-  return function( utm, extended ) {
-		return new Kernel( utm, extended );
-	};
-
-})();
+  return UTMManager
+})
