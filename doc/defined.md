@@ -8,18 +8,18 @@ Verify if the given variable(s) exists in the structure (url, string or json) us
 
 Taking action based on result
 
-```javascript
-utm.is( 'utm_source' )
+```js
+utm.is('utm_source')
   .defined()
-  .then( function() {
-    console.log( 'it is defined' );
-  } );
+  .then(() => {
+    console.log('it is defined');
+  });
 ```
 
 Obtaining the boolean result
 
-```javascript
-var result = utm.is( 'utm_source' ).defined().result();
+```js
+let result = utm.is('utm_source').defined().result();
 // true or false
 ```
 

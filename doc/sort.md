@@ -12,12 +12,12 @@ Will sort the variables in the order: utm_source, utm_medium, utm_campaign, utm_
 
 Any other variables will stay in the original order.
 
-```javascript
-const utm = UTMManager( 'utm_medium=cpc&utm_campaign=campaign&utm_term=coding&utm_source=google&another=value' );
+```js
+const utm = new UTMManager('utm_medium=cpc&utm_campaign=campaign&utm_term=coding&utm_source=google&another=value');
 
 utm.sort();
 
-var result = utm.toString();
+let result = utm.toString();
 // utm_source=google&utm_medium=cpc&utm_campaign=campaign&utm_term=coding&another=value
 ```
 
@@ -37,34 +37,34 @@ The valid options are:
 
 #### strict
 
-```javascript
-const utm = UTMManager( 'utm_medium=cpc&utm_campaign=campaign&utm_term=coding&utm_source=google&variable=value&another=value' );
+```js
+const utm = new UTMManager('utm_medium=cpc&utm_campaign=campaign&utm_term=coding&utm_source=google&variable=value&another=value');
 
-utm.sort( 'strict' );
+utm.sort('strict');
 
-var result = utm.toString();
+let result = utm.toString();
 // utm_source=google&utm_medium=cpc&utm_campaign=campaign&utm_term=coding&variable=value&another=value
 ```
 
 #### lexical
 
-```javascript
-const utm = UTMManager( 'utm_medium=cpc&utm_campaign=campaign&utm_term=coding&utm_source=google&variable=value&another=value' );
+```js
+const utm = new UTMManager('utm_medium=cpc&utm_campaign=campaign&utm_term=coding&utm_source=google&variable=value&another=value');
 
-utm.sort( 'lexical' );
+utm.sort('lexical');
 
-var result = utm.toString();
+let result = utm.toString();
 // another=value&utm_campaign=campaign&utm_medium=cpc&utm_source=google&utm_term=coding&variable=value
 ```
 
 #### strict-lexical
 
-```javascript
-const utm = UTMManager( 'utm_medium=cpc&utm_campaign=campaign&utm_term=coding&utm_source=google&variable=value&another=value' );
+```js
+const utm = new UTMManager('utm_medium=cpc&utm_campaign=campaign&utm_term=coding&utm_source=google&variable=value&another=value');
 
-utm.sort( 'strict-lexical' );
+utm.sort('strict-lexical');
 
-var result = utm.toString();
+let result = utm.toString();
 // utm_source=google&utm_medium=cpc&utm_campaign=campaign&utm_term=coding&another=value&variable=value
 ```
 

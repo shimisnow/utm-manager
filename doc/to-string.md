@@ -8,10 +8,10 @@ Returns the utm variables in string format to be used in an URL.
 
 ### Return all variables
 
-```javascript
-const utm = UTMManager( 'utm_source=google&utm_medium=cpc&utm_campaign=campaign&utm_term=coding' );
+```js
+const utm = new UTMManager('utm_source=google&utm_medium=cpc&utm_campaign=campaign&utm_term=coding');
 
-var result = utm.toString();
+let result = utm.toString();
 // utm_source=google&utm_medium=cpc&utm_campaign=campaign&utm_term=coding
 ```
 
@@ -19,45 +19,45 @@ var result = utm.toString();
 
 The utm key always needs to be a array.
 
-```javascript
-const utm = UTMManager( 'utm_source=google&utm_medium=cpc&utm_campaign=campaign' );
+```js
+const utm = new UTMManager('utm_source=google&utm_medium=cpc&utm_campaign=campaign');
 
-var result = utm.toString( {
-  utm : [ 'utm_source' ]
-} );
+let result = utm.toString({
+  utm: ['utm_source']
+});
 // utm_source=google
 
-result = utm.toString( {
-  utm : [ 'utm_source', 'utm_medium' ]
-} );
+result = utm.toString({
+  utm: ['utm_source', 'utm_medium']
+});
 // utm_source=google&utm_medium=cpc
 ```
 
-```javascript
-const utm = UTMManager( 'utm_source=google&utm_medium=cpc&utm_campaign=campaign' );
+```js
+const utm = new UTMManager('utm_source=google&utm_medium=cpc&utm_campaign=campaign');
 
-var result = utm.toString( {
-  utm : [ 'utm_source', 'utm_medium', 'utm_term' ]
-} );
+let result = utm.toString({
+  utm: ['utm_source', 'utm_medium', 'utm_term']
+});
 // utm_source=google&utm_medium=cpc
 
-result = utm.toString( {
-  utm : [ 'utm_source', 'utm_medium', 'utm_term' ],
-  undefined : true
-} );
+result = utm.toString({
+  utm: ['utm_source', 'utm_medium', 'utm_term'],
+  undefined: true
+});
 // utm_source=google&utm_medium=cpc&utm_term=
 ```
 
 ### Changing the symbol separating the variables
 
-```javascript
-const utm = UTMManager( 'utm_source=google&utm_medium=cpc' );
+```js
+const utm = new UTMManager('utm_source=google&utm_medium=cpc');
 
-var result = utm.toString( {
-  utm : [ 'utm_medium', 'utm_term' ]
-  undefined : true,
-  glue : '<>'
-} );
+let result = utm.toString({
+  utm: ['utm_medium', 'utm_term']
+  undefined: true,
+  glue: '<>'
+});
 // utm_medium=cpc<>utm_term=
 ```
 
