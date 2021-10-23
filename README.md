@@ -1,37 +1,52 @@
 ## How to use
 
-1. Download the the `utm-manager-x.y.z.zip` file from the [latest release](https://github.com/shimisnow/utm-manager/releases).
-2. Include the `utm-manager.min.js` file in your project.
+- Download the the `utm-manager-x.y.z.zip` file from the [latest release](https://github.com/shimisnow/utm-manager/releases).
+- Include the `UTMManager` libray in your project.
 
-After this, you can do something as:
+Using the library with the tag `<script>`:
+```html
+<script src="utm-manager.min.js" type="text/javascript"></script>
+```
 
-```javascript
-const utm = UTMManager();
-// this will parse the value of windows.location.href
+Using the library with [RequireJS](https://requirejs.org/):
+```js
+requirejs(['UTMManager'], (UTMManager) => {
+  ...
+})
+```
 
-utm.is( 'utm_source' ).equals( 'google' )
-  .and().is( 'utm_medium' ).equals( 'cpc' )
-  .then( function() {
-    console.log( 'Hey! This is a paid campaign from google!' );
-  } )
-  .otherwise( function() {
-    console.log( 'This is not a paid campaign from google!' );
-  } );
+
+After loading the library you can do something as:
+
+```js
+const utm = new UTMManager('https://domain.net/?utm_source=google&utm_medium=cpc&utm_campaign=campaign-01');
+
+utm.is('utm_source')
+  .equals('google')
+  .and()
+  .is('utm_medium')
+  .equals('cpc')
+  .then(() => {
+    console.log('Hey! This is a paid campaign from google!')
+  })
+  .otherwise(() => {
+    console.log('This is not a paid campaign from google!')
+  });
 ```
 
 or
 
-```javascript
-const utm = UTMManager();
+```js
+const utm = new UTMManager('https://domain.net/?utm_source=google&utm_medium=cpc&utm_campaign=campaign-01&utm_term=term-01')
 
-var term = '';
+let term = '';
 
 // get utm_term if it exists and has value
-utm.is( 'utm_term' )
+utm.is('utm_term')
   .filled()
-  .then( function() {
-    term = utm.get( 'utm_term' );
-  } );
+  .then(() => {
+    term = utm.get( 'utm_term' )
+  });
 ```
 
 The given examples are the simple ones. Read the [basic section](examples/basic.md) and [advanced section](examples/advanced.md) for more examples.

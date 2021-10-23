@@ -6,133 +6,130 @@
 
 ### Extract variables from the page url
 
-```javascript
-var utm = UTMManager();
-// will process the value of window.location.href
+```js
+const utm = new UTMManager(window.location.href);
 // Ex: https://domain.com/?utm_source=source&utm_medium=medium&utm_campaign=campaign&variable=value&another=value
 
-var string = utm.toString();
+let string = utm.toString();
 // utm_source=source&utm_medium=medium&utm_campaign=campaign
 ```
 
 Variables that is not from utm can also be extracted. For this, an array with the variables name must be given as parameter.
 
-```javascript
-var utm = UTMManager( [ 'variable' ] );
-// will process the value of window.location.href and extract all utm variable plus the 'variable'
+```js
+const utm = new UTMManager(window.location.href, ['variable']);
 // Ex: https://domain.com/?utm_source=source&utm_medium=medium&utm_campaign=campaign&variable=value&another=value
 
-var string = utm.toString();
+let string = utm.toString();
 // utm_source=source&utm_medium=medium&utm_campaign=campaign&variable=value
 ```
 
 To extract all variables, the parameter must be a string with value `all`.
 
-```javascript
-var utm = UTMManager( 'all' );
-// will process the value of window.location.href and extract all variables
+```js
+const utm = new UTMManager(window.location.href, 'all');
 // Ex: https://domain.com/?utm_source=source&utm_medium=medium&utm_campaign=campaign&variable=value&another=value
 
-var string = utm.toString();
+let string = utm.toString();
 // utm_source=source&utm_medium=medium&utm_campaign=campaign&variable=value&another=value
 ```
 
 ### Extract from a string with variables
 
-```javascript
-var utm = UTMManager( 'utm_source=source&utm_medium=medium&utm_campaign=campaign&variable=value&another=value' );
+```js
+const utm = new UTMManager('utm_source=source&utm_medium=medium&utm_campaign=campaign&variable=value&another=value');
 
-var string = utm.toString();
+let string = utm.toString();
 // utm_source=source&utm_medium=medium&utm_campaign=campaign
 ```
 
 Variables that is not from utm can also be extracted. For this, an array with the variables name must be given as the second parameter.
 
-```javascript
-var utm = UTMManager( 'utm_source=source&utm_medium=medium&utm_campaign=campaign&variable=value&another=value', [ 'variable' ] );
+```js
+const utm = new UTMManager('utm_source=source&utm_medium=medium&utm_campaign=campaign&variable=value&another=value', ['variable']);
 
-var string = utm.toString();
+let string = utm.toString();
 // utm_source=source&utm_medium=medium&utm_campaign=campaign&variable=value
 ```
 
 To extract all variables, the second parameter must be a string with value `all`.
 
-```javascript
-var utm = UTMManager( 'utm_source=source&utm_medium=medium&utm_campaign=campaign&variable=value&another=value', 'all' );
+```js
+const utm = new UTMManager('utm_source=source&utm_medium=medium&utm_campaign=campaign&variable=value&another=value', 'all');
 
-var string = utm.toString();
+let string = utm.toString();
 // utm_source=source&utm_medium=medium&utm_campaign=campaign&variable=value&another=value
 ```
 
 ### Extract utm from the given url
 
-```javascript
-var utm = UTMManager( 'https://domain.com/?utm_source=source&utm_medium=medium&utm_campaign=campaign&variable=value&another=value' );
+```js
+const utm = new UTMManager('https://domain.com/?utm_source=source&utm_medium=medium&utm_campaign=campaign&variable=value&another=value');
 
-var string = utm.toString();
+let string = utm.toString();
 // utm_source=source&utm_medium=medium&utm_campaign=campaign
 ```
 
 Variables that is not from utm can also be extracted. For this, an array with the variables name must be given as the second parameter.
 
-```javascript
-var utm = UTMManager( 'https://domain.com/?utm_source=source&utm_medium=medium&utm_campaign=campaign&variable=value&another=value', [ 'variable' ] );
+```js
+const utm = new UTMManager('https://domain.com/?utm_source=source&utm_medium=medium&utm_campaign=campaign&variable=value&another=value', ['variable']);
 
-var string = utm.toString();
+let string = utm.toString();
 // utm_source=source&utm_medium=medium&utm_campaign=campaign&variable=value
 ```
 
 To extract all variables, the second parameter must be a string with value `all`.
 
-```javascript
-var utm = UTMManager( 'https://domain.com/?utm_source=source&utm_medium=medium&utm_campaign=campaign&variable=value&another=value', 'all' );
+```js
+const utm = new UTMManager('https://domain.com/?utm_source=source&utm_medium=medium&utm_campaign=campaign&variable=value&another=value', 'all');
 
-var string = utm.toString();
+let string = utm.toString();
 // utm_source=source&utm_medium=medium&utm_campaign=campaign&variable=value&another=value
 ```
 
 ### Extract from a json
 
-```javascript
-var utm = UTMManager( {
-  'utm_source' : 'source',
-  'utm_medium' : 'medium',
-  'utm_campaign' : 'campaign',
-  'variable' : 'value',
-  'another' : 'value'
-} );
+```js
+const utm = new UTMManager({
+  'utm_source': 'source',
+  'utm_medium': 'medium',
+  'utm_campaign': 'campaign',
+  'variable': 'value',
+  'another': 'value'
+});
 
-var string = utm.toString();
+let string = utm.toString();
 // utm_source=source&utm_medium=medium&utm_campaign=campaign
 ```
 
 Variables that is not from utm can also be extracted. For this, an array with the variables name must be given as the second parameter.
 
-```javascript
-var utm = UTMManager( {
-  'utm_source' : 'source',
-  'utm_medium' : 'medium',
-  'utm_campaign' : 'campaign',
-  'variable' : 'value',
-  'another' : 'value'
-}, [ 'variable' ] );
+```js
+const utm = new UTMManager({
+  'utm_source': 'source',
+  'utm_medium': 'medium',
+  'utm_campaign': 'campaign',
+  'variable': 'value',
+  'another': 'value'
+}, ['variable']);
 
-var string = utm.toString();
+let string = utm.toString();
 // utm_source=source&utm_medium=medium&utm_campaign=campaign&variable=value
 ```
 
 To extract all variables, the second parameter must be a string with value `all`.
 
-```javascript
-var utm = UTMManager( {
-  'utm_source' : 'source',
-  'utm_medium' : 'medium',
-  'utm_campaign' : 'campaign',
-  'variable' : 'value',
-  'another' : 'value'
-}, 'all' );
+```js
+const utm = new UTMManager({
+  'utm_source': 'source',
+  'utm_medium': 'medium',
+  'utm_campaign': 'campaign',
+  'variable': 'value',
+  'another': 'value'
+}, 'all');
 
-var string = utm.toString();
+let string = utm.toString();
 // utm_source=source&utm_medium=medium&utm_campaign=campaign&variable=value&another=value
 ```
 

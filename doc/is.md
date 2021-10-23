@@ -10,14 +10,14 @@ Use this with [defined()](defined.md), [undefined()](undefined.md), [empty()](em
 
 Verify only one variable
 
-```javascript
-.is( 'utm_source' )
+```js
+utm.is( 'utm_source' )
 ```
 
 Verify multiple variables
 
-```javascript
-.is( [ 'utm_source', 'utm_medium' ] )
+```js
+utm.is(['utm_source', 'utm_medium'])
 ```
 
 ## Function signatures

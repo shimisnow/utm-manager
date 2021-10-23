@@ -8,18 +8,18 @@ Verify if the given variable(s) is filled (is defined and has value).
 
 Taking action based on result
 
-```javascript
-utm.is( 'utm_source' )
+```js
+utm.is('utm_source')
   .filled()
-  .then( function() {
-    console.log( 'it has value' );
-  } );
+  .then(() => {
+    console.log('it has value')
+  })
 ```
 
 Obtaining the boolean result
 
-```javascript
-var result = utm.is( 'utm_source' ).filled().result();
+```js
+let result = utm.is('utm_source').filled().result();
 // true or false
 ```
 

@@ -1,4 +1,4 @@
-const UTMManager = require('../../dist/utm-manager.min')
+const UTMManager = require('../dist/utm-manager.min')
 
 describe('UTMManager Test - set()', () => {
 
