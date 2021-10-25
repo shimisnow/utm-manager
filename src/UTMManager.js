@@ -53,47 +53,33 @@
       or: null
     }
 
-    // if parameter utm is undefined, parse the page URL
-    if( typeof utm !== 'undefined' ) {
+    if(typeof utm === 'undefined') {
+      throw new Error('The utm parameter must be provided');
+    }
 
-      // if a string, parses the string content
-      if( typeof utm === 'string' ) {
+    if( typeof utm === 'object' ) {
 
-        if( utm == 'all' ) {
-          this.parse( window.location.href, 'all' )
-        } else {
-          this.parse( utm, extended )
-        }
+      // expects a JSON object and transforms it in a string
+      // the transformation follows:
+      // JSON.stringify( utm );
+      // result = {"utm_source":"source","utm_medium":"medium"}
+      // .replace( /"|{|}/g, '' );
+      // result = utm_source:source,utm_medium:medium
+      // .replace( /:/g, '=' )
+      // result = utm_source=source,utm_medium=medium
+      // .replace( /,/g, '&' )
+      // result = utm_source=source&utm_medium=medium
 
-      // if an array, parse the page URL with extended variables
-      } else if( Array.isArray( utm ) ) {
+      var string = JSON.stringify( utm ).replace( /"|{|}/g, '' ).replace( /:/g, '=' ).replace( /,/g, '&' );
 
-        this.parse( window.location.href, utm );
-
-      } else if( typeof utm === 'object' ) {
-
-        // expects a JSON object and transforms it in a string
-        // the transformation follows:
-        // JSON.stringify( utm );
-        // result = {"utm_source":"source","utm_medium":"medium"}
-        // .replace( /"|{|}/g, '' );
-        // result = utm_source:source,utm_medium:medium
-        // .replace( /:/g, '=' )
-        // result = utm_source=source,utm_medium=medium
-        // .replace( /,/g, '&' )
-        // result = utm_source=source&utm_medium=medium
-
-        var string = JSON.stringify( utm ).replace( /"|{|}/g, '' ).replace( /:/g, '=' ).replace( /,/g, '&' );
-
-        this.parse( string, extended );
-      }
+      this.parse( string, extended );
     } else {
-
-      // parse the page URL
-      this.parse( window.location.href );
+      this.parse( utm, extended );
     }
 
   }
+
+
 
   /**
    * Parses a string with URL formatted variables or an URL to extract only the ones related with utm. If a set of variables is informed in the extended parameter, the will be extracted too.
