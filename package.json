@@ -4,7 +4,6 @@
   "description": "",
   "author": "Wadson Ferreira",
   "license": "MIT License",
-  "main": "gulpfile.js",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/shimisnow/utm-manager.git"
@@ -13,7 +12,12 @@
     "url": "https://github.com/shimisnow/utm-manager/issues"
   },
   "homepage": "https://github.com/shimisnow/utm-manager#readme",
+  "scripts": {
+    "build": "npx gulp",
+    "test": "npx jasmine"
+  },
   "devDependencies": {
+    "eslint": "^8.1.0",
     "gulp": "^4.0.2",
     "gulp-hashsum": "^1.2.0",
     "gulp-rename": "^2.0.0",

@@ -1,0 +1,41 @@
+{
+  "env": {
+    "browser": true,
+    "node": true,
+    "amd": true,
+    "commonjs": true,
+    "es2021": true
+  },
+  "extends": "eslint:recommended",
+  "parserOptions": {
+    "ecmaVersion": 13,
+    "sourceType": "module"
+  },
+  "rules": {
+    "indent": ["error", 2, {
+      "SwitchCase": 0
+    }],
+    "jsx-quotes": ["error", "prefer-single"],
+    "func-call-spacing": ["error", "never"],
+    "curly": "error",
+    "brace-style": "error",
+    "default-case": "error",
+    "default-case-last": "error",
+    "func-style": ["error", "declaration"],
+    "array-bracket-spacing": ["error", "never"],
+    "comma-dangle": ["error", "never"],
+    "key-spacing": ["error", {
+      "beforeColon": false
+    }],
+    "no-multi-spaces": "error",
+    "no-tabs": "error",
+    "no-trailing-spaces": "error",
+    "no-whitespace-before-property": "error",
+    "semi": ["error", "never"],
+    "space-in-parens": ["error", "never"],
+    "computed-property-spacing": ["error", "never"],
+    "no-undef": ["error", {
+      "typeof": false
+    }]
+  }
+}
