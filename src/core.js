@@ -14,7 +14,7 @@
 
   function UTMManager(utm, extended) {
 
-    this.version = '1.1.0'
+    this.version = '2.0.0'
 
     this.config = {
       variables: [
