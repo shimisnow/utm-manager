@@ -71,6 +71,16 @@ utm.is(['utm_source', 'utm_medium'])
   .equals([['google', 'facebook'], 'cpc'])
 ```
 
+The example is equivalent to
+
+```js
+utm.is('utm_source')
+  .equals(['google', 'facebook'])
+  .and()
+  is('utm_medium')
+  .equals('cpc')
+```
+
 ## Function signatures
 
 The following table presents all parameters combination that can be used in this function.

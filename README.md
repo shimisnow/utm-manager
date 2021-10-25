@@ -1,9 +1,9 @@
 ## How to use
 
-- Download the the `utm-manager-x.y.z.zip` file from the [latest release](https://github.com/shimisnow/utm-manager/releases).
+- Download the `utm-manager-x.y.z.zip` file from the [latest release](https://github.com/shimisnow/utm-manager/releases).
 - Include the `UTMManager` libray in your project.
 
-Using the library with the tag `<script>`:
+Using the library with tag `<script>`:
 ```html
 <script src="utm-manager.min.js" type="text/javascript"></script>
 ```
@@ -49,7 +49,7 @@ utm.is('utm_term')
   });
 ```
 
-The given examples are the simple ones. Read the [basic section](examples/basic.md) and [advanced section](examples/advanced.md) for more examples.
+The given examples are the simple ones. Read the [basic section](doc/examples/basic.md) and [advanced section](doc/examples/advanced.md) for more examples.
 
 ## Documentation
 
@@ -57,31 +57,31 @@ UTMManager's documentation is included in the directory [doc](doc/) and each fun
 
 #### Basic
 
-| function                             | since |      |
-| :----------------------------------: | :---: | :--- |
-| [`UTMManager()`](doc/utm-manager.md) | 1.0.0 | Parses an URL or string and extract the utm variables |
-| [`get()`](doc/get.md)                | 1.0.0 | Returns the value of one or more variables |
-| [`set()`](doc/set.md)                | 1.0.0 | Sets the value of one or more variables |
-| [`add()`](doc/add.md)                | 1.1.0 | Adds one or more variables |
-| [`remove()`](doc/remove.md)          | 1.0.0 | Removes one or more variables |
-| [`toString()`](doc/to-string.md)     | 1.0.0 | Returns some or all variables grouped as a string |
+| function                                       | since |      |
+| :--------------------------------------------: | :---: | :--- |
+| [`UTMManager()`](doc/functions/utm-manager.md) | 1.0.0 | Parses an URL or string and extract the utm variables |
+| [`get()`](doc/functions/get.md)                | 1.0.0 | Returns the value of one or more variables |
+| [`set()`](doc/functions/set.md)                | 1.0.0 | Sets the value of one or more variables |
+| [`add()`](doc/functions/add.md)                | 1.1.0 | Adds one or more variables |
+| [`remove()`](doc/functions/remove.md)          | 1.0.0 | Removes one or more variables |
+| [`toString()`](doc/functions/to-string.md)     | 1.0.0 | Returns some or all variables grouped as a string |
 
 #### Advanced
 
-| function                               | since |      |
-| :------------------------------------: | :---: | :--- |
-| [`is().defined()`](doc/defined.md)     | 1.0.0 | Verifies if one or more variables are defined |
-| [`is().undefined()`](doc/undefined.md) | 1.0.0 | Verifies if one or more variables are undefined |
-| [`is().empty()`](doc/empty.md)         | 1.0.0 | Verifies if one or more variables are empty |
-| [`is().filled()`](doc/filled.md)       | 1.1.0 | Verifies if one or more variables are defined and has value |
-| [`is().equals()`](doc/equals.md)       | 1.0.0 | Verifies if one or more variables are equals the given value |
-| [`is().not()`](doc/not.md)             | 1.0.0 | Verifies if all given variables are different from the given value |
-| [`then()`](doc/then.md)                | 1.0.0 | Execute if the performed verification with is() return true |
-| [`otherwise()`](doc/otherwise.md)      | 1.0.0 | Execute if the performed verification with is() return false |
-| [`always()`](doc/always.md)            | 1.0.0 | Execute if the performed verification with is() return either true or false |
-| [`and()`](doc/and.md)                  | 1.0.0 | Performs an and operation with the result of two verification with is() |
-| [`or()`](doc/or.md)                    | 1.0.0 | Performs an or operation with the result of two verification with is() |
-| [`sort()`](doc/sort.md)                | 1.1.0 | Sorts the variables |
+| function                                         | since |      |
+| :----------------------------------------------: | :---: | :--- |
+| [`is().defined()`](doc/functions/defined.md)     | 1.0.0 | Verifies if one or more variables are defined |
+| [`is().undefined()`](doc/functions/undefined.md) | 1.0.0 | Verifies if one or more variables are undefined |
+| [`is().empty()`](doc/functions/empty.md)         | 1.0.0 | Verifies if one or more variables are empty |
+| [`is().filled()`](doc/functions/filled.md)       | 1.1.0 | Verifies if one or more variables are defined and has value |
+| [`is().equals()`](doc/functions/equals.md)       | 1.0.0 | Verifies if one or more variables are equals the given value |
+| [`is().not()`](doc/functions/not.md)             | 1.0.0 | Verifies if all given variables are different from the given value |
+| [`then()`](doc/functions/then.md)                | 1.0.0 | Execute if the performed verification with is() return true |
+| [`otherwise()`](doc/functions/otherwise.md)      | 1.0.0 | Execute if the performed verification with is() return false |
+| [`always()`](doc/functions/always.md)            | 1.0.0 | Execute if the performed verification with is() return either true or false |
+| [`and()`](doc/functions/and.md)                  | 1.0.0 | Performs an and operation with the result of two verification with is() |
+| [`or()`](doc/functions/or.md)                    | 1.0.0 | Performs an or operation with the result of two verification with is() |
+| [`sort()`](doc/functions/sort.md)                | 1.1.0 | Sorts the variables |
 
 ## Versioning
 

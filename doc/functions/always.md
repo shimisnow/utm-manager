@@ -18,7 +18,8 @@ utm.is('utm_source')
   .then(() => {
     console.log('source is google')
   })
-  .equals('facebook').then(() => {
+  .equals('facebook')
+  .then(() => {
     console.log('source is facebook')
   })
   .always(() => {
