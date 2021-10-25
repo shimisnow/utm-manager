@@ -14,11 +14,13 @@
   "homepage": "https://github.com/shimisnow/utm-manager#readme",
   "scripts": {
     "build": "npx gulp",
-    "test": "npx jasmine"
+    "test": "npx jasmine",
+    "lint": "npx eslint src/*.js"
   },
   "devDependencies": {
     "eslint": "^8.1.0",
     "gulp": "^4.0.2",
+    "gulp-concat": "^2.6.1",
     "gulp-hashsum": "^1.2.0",
     "gulp-rename": "^2.0.0",
     "gulp-rm": "^2.0.0",

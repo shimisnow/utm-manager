@@ -10,13 +10,21 @@ services:
       - ./:/home/node/app
     command: npm install
 
-  compile:
+  lint:
     image: node:16.11.1
     user: node
     working_dir: /home/node/app
     volumes:
       - ./:/home/node/app
-    command: npx gulp
+    command: npm run lint
+
+  build:
+    image: node:16.11.1
+    user: node
+    working_dir: /home/node/app
+    volumes:
+      - ./:/home/node/app
+    command: npm run build
 
   test:
     image: node:16.11.1
@@ -24,4 +32,4 @@ services:
     working_dir: /home/node/app
     volumes:
       - ./:/home/node/app
-    command: npx jasmine tests/jasmine/*.spec.js
+    command: npm test
