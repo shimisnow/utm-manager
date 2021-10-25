@@ -13,7 +13,8 @@
   },
   "homepage": "https://github.com/shimisnow/utm-manager#readme",
   "scripts": {
-    "build": "npx gulp",
+    "build": "npx gulp --env production",
+    "build-dev": "npx gulp",
     "test": "npx jasmine",
     "lint": "npx eslint src/*.js"
   },
