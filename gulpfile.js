@@ -1,5 +1,6 @@
 const gulp    = require('gulp')
 const gutil   = require('gulp-util')
+const concat  = require('gulp-concat')
 const uglify  = require('gulp-uglify')
 const rm      = require('gulp-rm')
 const rename  = require('gulp-rename')
@@ -8,7 +9,13 @@ const hashsum = require('gulp-hashsum')
 
 var paths = {
   js: {
-    src: 'src/UTMManager.js',
+    src: [
+      'src/core.js',
+      'src/condition.js',
+      'src/action.js',
+      'src/manipulation.js',
+      'src/util.js'
+    ],
     dest: 'dist/',
     filename: 'utm-manager.min.js'
   },
@@ -31,6 +38,7 @@ gulp.task('clean', () => {
 
 gulp.task('compile', () => {
   return gulp.src(paths.js.src)
+    .pipe( concat( 'tmp.js' ) )
     .pipe(gutil.env.env === 'production' ? uglify() : gutil.noop())
     .pipe(rename(paths.js.filename))
     .pipe(gulp.dest(paths.js.dest))
