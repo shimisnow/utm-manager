@@ -83,6 +83,10 @@ UTMManager's documentation is included in the directory [doc](doc/) and each fun
 | [`or()`](doc/functions/or.md)                    | 1.0.0 | Performs an or operation with the result of two verification with is() |
 | [`sort()`](doc/functions/sort.md)                | 1.1.0 | Sorts the variables |
 
+## How to build, lint and test
+
+This tasks can be performed with Node.js or Docker containers. See the [developer documentation](doc/developer/main.md) for details.
+
 ## Versioning
 
 The release cycle is maintained under the [Semantic Versioning guidelines](https://semver.org/).
