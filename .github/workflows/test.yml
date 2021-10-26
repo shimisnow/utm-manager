@@ -2,9 +2,9 @@ name: Test
 
 on:
   push:
-    branches: [ master, staging ]
+    branches: [ staging ]
   pull_request:
-    branches: [ master, staging ]
+    branches: [ staging ]
 
 env:
   NODE: 16.11.1
