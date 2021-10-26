@@ -39,6 +39,7 @@
     "computed-property-spacing": ["error", "never"],
     "no-undef": ["error", {
       "typeof": false
-    }]
+    }],
+    "no-console": "error"
   }
 }
