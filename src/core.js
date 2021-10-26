@@ -1,14 +1,10 @@
 (function(global, factory) {
   if(typeof exports === 'object' && typeof module !== 'undefined') {
     module.exports = factory()
-    console.log('export')
-    console.log(module.exports)
   } else if(typeof define === 'function' && define.amd) {
     define(factory)
-    console.log('define')
   } else {
     global.UTMManager = factory()
-    console.log('browser')
   }
 })(this, function(){
 
@@ -97,7 +93,7 @@
         if(typeof options[keys[i]] === 'function') {
           UTMManager.prototype[keys[i]] = options[keys[i]]
         } else {
-          console.warn(`UTMManager: the key '${keys[i]}' cannot be use to extend the library. The key does not provide a function.`)
+          throw new Error(`UTMManager: the key '${keys[i]}' cannot be use to extend the library. The key does not provide a function.`)
         }
       }
     }
