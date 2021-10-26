@@ -1,4 +1,4 @@
-# Build and test
+# Build, lint and test
 
 ## Install dependencies
 
