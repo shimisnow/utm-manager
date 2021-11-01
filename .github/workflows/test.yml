@@ -7,7 +7,7 @@ on:
     branches: [ staging ]
 
 env:
-  NODE: 16.11.1
+  NODE: 17.0.1
 
 jobs:
   test:
