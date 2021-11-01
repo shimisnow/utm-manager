@@ -1,13 +1,18 @@
-const gulp    = require('gulp')
-const gutil   = require('gulp-util')
+const {
+  src,
+  dest,
+  series
+} = require('gulp');
+
 const concat  = require('gulp-concat')
+const noop    = require("gulp-noop")
 const uglify  = require('gulp-uglify')
 const rm      = require('gulp-rm')
 const rename  = require('gulp-rename')
 const zip     = require('gulp-zip')
 const hashsum = require('gulp-hashsum')
 
-var paths = {
+const paths = {
   js: {
     src: [
       'src/core.js',
@@ -31,37 +36,35 @@ var paths = {
   }
 }
 
-gulp.task('clean', () => {
-  return gulp.src('dist/**/*', { read: false })
+function clean() {
+  return src('dist/**/*', { read: false })
     .pipe(rm())
-})
+}
 
-gulp.task('compile', () => {
-  return gulp.src(paths.js.src)
-    .pipe( concat( 'tmp.js' ) )
-    .pipe(gutil.env.env === 'production' ? uglify() : gutil.noop())
+function compile() {
+  return src(paths.js.src)
+    .pipe(concat('tmp.js'))
+    .pipe(process.env.NODE_ENV === 'production' ? uglify() : noop())
     .pipe(rename(paths.js.filename))
-    .pipe(gulp.dest(paths.js.dest))
-})
+    .pipe(dest(paths.js.dest))
+}
 
-gulp.task('zip', () => {
-  return gulp.src(paths.zip.src)
+function compact() {
+  return src(paths.zip.src)
     .pipe(zip(paths.zip.filename))
-    .pipe(gulp.dest(paths.zip.dest))
-})
+    .pipe(dest(paths.zip.dest))
+}
 
-gulp.task('hashsum', () => {
-  return gulp.src([ paths.hashsum.src ])
+function hash() {
+  return src([paths.hashsum.src])
     .pipe(hashsum({
       dest: paths.hashsum.dest,
       filename: paths.hashsum.filename
     }))
-})
+}
 
-gulp.task('default',
-  gulp.series([
-    'clean',
-    'compile',
-    gutil.env.env === 'production' ? [ 'zip', 'hashsum' ] : []
-  ])
-)
+if(process.env.NODE_ENV === 'production') {
+  exports.default = series(clean, compile, compact, hash)
+} else {
+  exports.default = series(clean, compile)
+}
