@@ -6,6 +6,15 @@ Verify if one or more variables is equals to one or more values.
 
 This function do not return a boolean result. It is necessary to use alongside with [result()](result.md) to obtain the boolean result.
 
+## Function signatures
+
+The following table presents all parameters combination that can be used in this function.
+
+| PARAMETERS | SINCE | DESCRIPTION |
+| ---------- | ----- | ----------- |
+| string     | 1.0.0 | Compare the value of one variable |
+| array      | 1.0.0 | Compare the value for multiple variables |
+
 ## How to use
 
 ### One variable and one value
@@ -30,7 +39,7 @@ utm.is('utm_source')
   .equals('google')
   .then(() => {
     console.log('it is google')
-  });
+  })
 ```
 
 ### One variable and multiple values
@@ -81,11 +90,3 @@ utm.is('utm_source')
   .equals('cpc')
 ```
 
-## Function signatures
-
-The following table presents all parameters combination that can be used in this function.
-
-| PARAMETERS | SINCE | DESCRIPTION |
-| ---------- | ----- | ----------- |
-| string     | 1.0.0 | Compare the value of one variable |
-| array      | 1.0.0 | Compare the value for multiple variables |

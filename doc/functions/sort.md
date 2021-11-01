@@ -4,6 +4,15 @@
 
 Sorts the variables.
 
+## Function signatures
+
+The following table presents all parameters combination that can be used in this function.
+
+| PARAMETERS | SINCE | DESCRIPTION |
+| ---------- | ----- | ----------- |
+|            | 1.1.0 | Sorts the variables in the default utm order |
+| string     | 1.1.0 | Sorts the variables using a pre-defined order |
+
 ## How to use
 
 ### Basic sorting
@@ -13,11 +22,11 @@ Will sort the variables in the order: utm_source, utm_medium, utm_campaign, utm_
 Any other variables will stay in the original order.
 
 ```js
-const utm = new UTMManager('utm_medium=cpc&utm_campaign=campaign&utm_term=coding&utm_source=google&another=value');
+const utm = new UTMManager('utm_medium=cpc&utm_campaign=campaign&utm_term=coding&utm_source=google&another=value')
 
-utm.sort();
+utm.sort()
 
-let result = utm.toString();
+let result = utm.toString()
 // utm_source=google&utm_medium=cpc&utm_campaign=campaign&utm_term=coding&another=value
 ```
 
@@ -38,41 +47,33 @@ The valid options are:
 #### strict
 
 ```js
-const utm = new UTMManager('utm_medium=cpc&utm_campaign=campaign&utm_term=coding&utm_source=google&variable=value&another=value');
+const utm = new UTMManager('utm_medium=cpc&utm_campaign=campaign&utm_term=coding&utm_source=google&variable=value&another=value')
 
-utm.sort('strict');
+utm.sort('strict')
 
-let result = utm.toString();
+let result = utm.toString()
 // utm_source=google&utm_medium=cpc&utm_campaign=campaign&utm_term=coding&variable=value&another=value
 ```
 
 #### lexical
 
 ```js
-const utm = new UTMManager('utm_medium=cpc&utm_campaign=campaign&utm_term=coding&utm_source=google&variable=value&another=value');
+const utm = new UTMManager('utm_medium=cpc&utm_campaign=campaign&utm_term=coding&utm_source=google&variable=value&another=value')
 
-utm.sort('lexical');
+utm.sort('lexical')
 
-let result = utm.toString();
+let result = utm.toString()
 // another=value&utm_campaign=campaign&utm_medium=cpc&utm_source=google&utm_term=coding&variable=value
 ```
 
 #### strict-lexical
 
 ```js
-const utm = new UTMManager('utm_medium=cpc&utm_campaign=campaign&utm_term=coding&utm_source=google&variable=value&another=value');
+const utm = new UTMManager('utm_medium=cpc&utm_campaign=campaign&utm_term=coding&utm_source=google&variable=value&another=value')
 
-utm.sort('strict-lexical');
+utm.sort('strict-lexical')
 
-let result = utm.toString();
+let result = utm.toString()
 // utm_source=google&utm_medium=cpc&utm_campaign=campaign&utm_term=coding&another=value&variable=value
 ```
 
-## Function signatures
-
-The following table presents all parameters combination that can be used in this function.
-
-| PARAMETERS | SINCE | DESCRIPTION |
-| ---------- | ----- | ----------- |
-|            | 1.1.0 | Sorts the variables in the default utm order |
-| string     | 1.1.0 | Sorts the variables using a pre-defined order |

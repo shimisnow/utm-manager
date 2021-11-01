@@ -5,8 +5,16 @@
 Receives a function as parameter that will be executed when the action performed together with is() resulted in true.
 
 ```js
-.then( function() { ... } );
+.then( function() { ... } )
 ```
+
+## Function signatures
+
+The following table presents all parameters combination that can be used in this function.
+
+| PARAMETERS | SINCE | DESCRIPTION |
+| ---------- | ----- | ----------- |
+| function   | 1.0.0 | Executes the given function if the performed comparison returns true |
 
 ## How to use
 
@@ -18,8 +26,8 @@ The message "source is google" will be displayed in console when utm_source=goog
 utm.is('utm_source')
   .equals('google')
   .then(() => {
-    console.log('source is google');
-  });
+    console.log('source is google')
+  })
 ```
 
 ### Advanced use case
@@ -30,18 +38,10 @@ The message "source is google" will be displayed in console when utm_source=goog
 utm.is('utm_source')
   .equals('google')
   .then(() => {
-    console.log('source is google');
+    console.log('source is google')
   })
   .equals('facebook')
   .then(() => {
-    console.log('source is facebook');
-  });
+    console.log('source is facebook')
+  })
 ```
-
-## Function signatures
-
-The following table presents all parameters combination that can be used in this function.
-
-| PARAMETERS | SINCE | DESCRIPTION |
-| ---------- | ----- | ----------- |
-| function   | 1.0.0 | Executes the given function if the performed comparison returns true |

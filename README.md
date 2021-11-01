@@ -19,7 +19,7 @@ requirejs(['UTMManager'], (UTMManager) => {
 After loading the library you can do something as:
 
 ```js
-const utm = new UTMManager('https://domain.net/?utm_source=google&utm_medium=cpc&utm_campaign=campaign-01');
+const utm = new UTMManager('https://domain.net/?utm_source=google&utm_medium=cpc&utm_campaign=campaign-01')
 
 utm.is('utm_source')
   .equals('google')
@@ -31,7 +31,7 @@ utm.is('utm_source')
   })
   .otherwise(() => {
     console.log('This is not a paid campaign from google!')
-  });
+  })
 ```
 
 or
@@ -39,14 +39,14 @@ or
 ```js
 const utm = new UTMManager('https://domain.net/?utm_source=google&utm_medium=cpc&utm_campaign=campaign-01&utm_term=term-01')
 
-let term = '';
+let term = ''
 
 // get utm_term if it exists and has value
 utm.is('utm_term')
   .filled()
   .then(() => {
     term = utm.get( 'utm_term' )
-  });
+  })
 ```
 
 The given examples are the simple ones. Read the [basic section](doc/examples/basic.md) and [advanced section](doc/examples/advanced.md) for more examples.
@@ -55,32 +55,44 @@ The given examples are the simple ones. Read the [basic section](doc/examples/ba
 
 UTMManager's documentation is included in the directory [doc](doc/) and each function can be viewed from the following links:
 
-#### Basic
+#### Manipulation functions
 
 | function                                       | since |      |
 | :--------------------------------------------: | :---: | :--- |
 | [`UTMManager()`](doc/functions/utm-manager.md) | 1.0.0 | Parses an URL or string and extract the utm variables |
-| [`get()`](doc/functions/get.md)                | 1.0.0 | Returns the value of one or more variables |
-| [`set()`](doc/functions/set.md)                | 1.0.0 | Sets the value of one or more variables |
 | [`add()`](doc/functions/add.md)                | 1.1.0 | Adds one or more variables |
+| [`get()`](doc/functions/get.md)                | 1.0.0 | Returns the value of one or more variables |
 | [`remove()`](doc/functions/remove.md)          | 1.0.0 | Removes one or more variables |
+| [`set()`](doc/functions/set.md)                | 1.0.0 | Sets the value of one or more variables |
 | [`toString()`](doc/functions/to-string.md)     | 1.0.0 | Returns some or all variables grouped as a string |
 
-#### Advanced
+#### Condition functions
+
+| function                                    | since |      |
+| :-----------------------------------------: | :---: | :--- |
+| [`and()`](doc/functions/and.md)             | 1.0.0 | Performs an and operation with the result of two verification with is() |
+| [`defined()`](doc/functions/defined.md)     | 1.0.0 | Verifies if one or more variables are defined |
+| [`equals()`](doc/functions/equals.md)       | 1.0.0 | Verifies if one or more variables are equals the given value |
+| [`empty()`](doc/functions/empty.md)         | 1.0.0 | Verifies if one or more variables are empty |
+| [`filled()`](doc/functions/filled.md)       | 1.1.0 | Verifies if one or more variables are defined and has value |
+| [`not()`](doc/functions/not.md)             | 1.0.0 | Verifies if all given variables are different from the given value |
+| [`or()`](doc/functions/or.md)               | 1.0.0 | Performs an or operation with the result of two verification with is() |
+| [`undefined()`](doc/functions/undefined.md) | 1.0.0 | Verifies if one or more variables are undefined |
+
+#### Action functions
 
 | function                                         | since |      |
 | :----------------------------------------------: | :---: | :--- |
-| [`is().defined()`](doc/functions/defined.md)     | 1.0.0 | Verifies if one or more variables are defined |
-| [`is().undefined()`](doc/functions/undefined.md) | 1.0.0 | Verifies if one or more variables are undefined |
-| [`is().empty()`](doc/functions/empty.md)         | 1.0.0 | Verifies if one or more variables are empty |
-| [`is().filled()`](doc/functions/filled.md)       | 1.1.0 | Verifies if one or more variables are defined and has value |
-| [`is().equals()`](doc/functions/equals.md)       | 1.0.0 | Verifies if one or more variables are equals the given value |
-| [`is().not()`](doc/functions/not.md)             | 1.0.0 | Verifies if all given variables are different from the given value |
-| [`then()`](doc/functions/then.md)                | 1.0.0 | Execute if the performed verification with is() return true |
-| [`otherwise()`](doc/functions/otherwise.md)      | 1.0.0 | Execute if the performed verification with is() return false |
 | [`always()`](doc/functions/always.md)            | 1.0.0 | Execute if the performed verification with is() return either true or false |
-| [`and()`](doc/functions/and.md)                  | 1.0.0 | Performs an and operation with the result of two verification with is() |
-| [`or()`](doc/functions/or.md)                    | 1.0.0 | Performs an or operation with the result of two verification with is() |
+| [`otherwise()`](doc/functions/otherwise.md)      | 1.0.0 | Execute if the performed verification with is() return false |
+| [`sort()`](doc/functions/sort.md)                | 1.1.0 | Sorts the variables |
+| [`then()`](doc/functions/then.md)                | 1.0.0 | Execute if the performed verification with is() return true |
+
+#### Util functions
+
+| function                                         | since |      |
+| :----------------------------------------------: | :---: | :--- |
+| `result()`                                       | 1.0.0 | Return the boolean result from a condition function |
 | [`sort()`](doc/functions/sort.md)                | 1.1.0 | Sorts the variables |
 
 ## How to build, lint and test
