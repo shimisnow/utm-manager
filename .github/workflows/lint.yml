@@ -2,12 +2,12 @@ name: Lint
 
 on:
   push:
-    branches: [ staging ]
-  pull_request:
-    branches: [ staging ]
+    branches:
+      - 'issue-**'
+      - develop
 
 env:
-  NODE: 17.0.1
+  NODE: 21.4
 
 jobs:
   lint:

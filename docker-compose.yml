@@ -3,7 +3,7 @@ version: '3.8'
 services:
 
   install:
-    image: node:17.0.1
+    image: node:21.4-alpine3.17
     user: node
     working_dir: /home/node/app
     volumes:
@@ -11,7 +11,7 @@ services:
     command: npm install
 
   lint:
-    image: node:17.0.1
+    image: node:21.4-alpine3.17
     user: node
     working_dir: /home/node/app
     volumes:
@@ -19,7 +19,7 @@ services:
     command: npm run lint
 
   build:
-    image: node:17.0.1
+    image: node:21.4-alpine3.17
     user: node
     working_dir: /home/node/app
     volumes:
@@ -27,7 +27,7 @@ services:
     command: npm run build
 
   build-dev:
-    image: node:17.0.1
+    image: node:21.4-alpine3.17
     user: node
     working_dir: /home/node/app
     volumes:
@@ -35,7 +35,7 @@ services:
     command: npm run build-dev
 
   test:
-    image: node:17.0.1
+    image: node:21.4-alpine3.17
     user: node
     working_dir: /home/node/app
     volumes:

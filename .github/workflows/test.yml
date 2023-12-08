@@ -2,12 +2,15 @@ name: Test
 
 on:
   push:
-    branches: [ staging ]
+    branches:
+      - 'issue-**'
+      - develop
   pull_request:
-    branches: [ staging ]
+    branches:
+      - main
 
 env:
-  NODE: 17.0.1
+  NODE: 21.4
 
 jobs:
   test:
